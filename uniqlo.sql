@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2021 at 11:13 AM
+-- Generation Time: Sep 05, 2021 at 04:53 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -18,271 +18,265 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uniqlo`
+-- Database: `uniqlo2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblbill`
+-- Table structure for table `tbl_bill`
 --
 
-CREATE TABLE `tblbill` (
-  `id_bill` varchar(50) NOT NULL,
+CREATE TABLE `tbl_bill` (
+  `id` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `total` double NOT NULL,
+  `status` tinyint(1) NOT NULL,
   `id_customer` varchar(50) NOT NULL,
-  `id_staff` varchar(50) NOT NULL,
-  `datesubmit_bill` date NOT NULL,
-  `total_bill` double NOT NULL,
-  `status_bill` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblbillinfo`
---
-
-CREATE TABLE `tblbillinfo` (
-  `id_billinfo` varchar(50) NOT NULL,
-  `id_bill` varchar(50) NOT NULL,
-  `id_product` varchar(50) NOT NULL,
-  `intomoney_billinfo` float NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblcategory`
---
-
-CREATE TABLE `tblcategory` (
-  `id_Category` varchar(50) NOT NULL,
-  `name_Category` varchar(200) NOT NULL,
-  `id_Sectors` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblcolor`
---
-
-CREATE TABLE `tblcolor` (
-  `id_color` varchar(50) NOT NULL,
-  `name_color` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblcustomer`
---
-
-CREATE TABLE `tblcustomer` (
-  `id_customer` varchar(50) NOT NULL,
-  `name_customer` varchar(200) NOT NULL,
-  `phone_customer` varchar(50) NOT NULL,
-  `email_customer` varchar(50) NOT NULL,
-  `password_customer` varchar(200) NOT NULL,
-  `address_customer` varchar(200) NOT NULL,
-  `img_customer` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblimportproduct`
---
-
-CREATE TABLE `tblimportproduct` (
-  `id_importproduct` varchar(50) NOT NULL,
-  `id_order` varchar(50) NOT NULL,
-  `dateimport_importproduct` date NOT NULL,
-  `total_importproduct` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblimportproductinfo`
---
-
-CREATE TABLE `tblimportproductinfo` (
-  `id_importproductinfo` varchar(50) NOT NULL,
-  `id_importproduct` varchar(50) NOT NULL,
-  `id_orderinfo` varchar(50) NOT NULL,
-  `quantity_importproductinfo` int(11) NOT NULL,
-  `importprice_importproductinfo` float NOT NULL,
-  `intomoney_importproductinfo` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblnew`
---
-
-CREATE TABLE `tblnew` (
-  `id_new` varchar(50) NOT NULL,
-  `name_new` varchar(200) NOT NULL,
-  `id_photo` varchar(50) NOT NULL,
-  `description_new` mediumtext NOT NULL,
-  `datesubmit` date NOT NULL,
   `id_staff` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblobject`
+-- Table structure for table `tbl_bill_info`
 --
 
-CREATE TABLE `tblobject` (
-  `id_Object` varchar(50) NOT NULL,
-  `name_Object` varchar(200) NOT NULL
+CREATE TABLE `tbl_bill_info` (
+  `id` varchar(50) NOT NULL,
+  `id_bill` varchar(50) NOT NULL,
+  `id_product_info` varchar(50) NOT NULL,
+  `into_money` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblorder`
+-- Table structure for table `tbl_category`
 --
 
-CREATE TABLE `tblorder` (
+CREATE TABLE `tbl_category` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `id_sectors` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_color`
+--
+
+CREATE TABLE `tbl_color` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_customer`
+--
+
+CREATE TABLE `tbl_customer` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(2000) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `image` varchar(500) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_import`
+--
+
+CREATE TABLE `tbl_import` (
+  `id` varchar(50) NOT NULL,
+  `date_import` date NOT NULL,
   `id_order` varchar(50) NOT NULL,
-  `dateorder_order` date NOT NULL,
-  `total_order` double NOT NULL,
-  `status_order` tinyint(1) NOT NULL,
-  `id_supplier` varchar(50) NOT NULL
+  `total_import` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblorderinfo`
+-- Table structure for table `tbl_import_info`
 --
 
-CREATE TABLE `tblorderinfo` (
-  `id_orderinfo` varchar(50) NOT NULL,
-  `id_order` varchar(50) NOT NULL,
-  `id_product` varchar(50) NOT NULL,
-  `quantity_orderinfo` int(11) NOT NULL,
-  `priceorder_orderinfo` double NOT NULL,
-  `intomoney_orderinfo` float NOT NULL
+CREATE TABLE `tbl_import_info` (
+  `id` varchar(50) NOT NULL,
+  `id_import` varchar(50) NOT NULL,
+  `id_order_info` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `id_product_info` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblphoto`
+-- Table structure for table `tbl_news`
 --
 
-CREATE TABLE `tblphoto` (
-  `id_photo` varchar(50) NOT NULL,
-  `name_photo` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblproduct`
---
-
-CREATE TABLE `tblproduct` (
-  `id_product` varchar(50) NOT NULL,
-  `name_product` varchar(200) NOT NULL,
-  `description_product` varchar(500) NOT NULL,
-  `id_Category` varchar(50) NOT NULL,
-  `id_promotion` varchar(50) NOT NULL,
-  `price_product` float NOT NULL,
-  `pricediscount_product` float NOT NULL,
-  `like_product` varchar(50) NOT NULL,
-  `status_product` tinyint(1) NOT NULL,
-  `quantity_product` varchar(200) NOT NULL,
-  `id_color` varchar(50) NOT NULL,
-  `id_size` varchar(50) NOT NULL,
-  `id_photo` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblpromotion`
---
-
-CREATE TABLE `tblpromotion` (
-  `id_promotion` varchar(50) NOT NULL,
-  `name_promotion` varchar(200) NOT NULL,
-  `expiry_promotion` date NOT NULL,
-  `content_promotion` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblrating`
---
-
-CREATE TABLE `tblrating` (
-  `id_rating` varchar(50) NOT NULL,
-  `name_rating` varchar(200) NOT NULL,
-  `id_customer` varchar(50) NOT NULL,
-  `id_product` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblsectors`
---
-
-CREATE TABLE `tblsectors` (
-  `id_Sectors` varchar(50) NOT NULL,
-  `name_Sectors` varchar(200) NOT NULL,
-  `id_Object` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblsize`
---
-
-CREATE TABLE `tblsize` (
-  `id_size` varchar(50) NOT NULL,
-  `name_size` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblstaff`
---
-
-CREATE TABLE `tblstaff` (
+CREATE TABLE `tbl_news` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `date` date NOT NULL,
+  `description` mediumtext NOT NULL,
   `id_staff` varchar(50) NOT NULL,
-  `name_staff` varchar(200) NOT NULL,
-  `phone_staff` varchar(20) NOT NULL,
-  `email_staff` varchar(200) NOT NULL,
-  `address_staff` varchar(200) NOT NULL,
-  `password_staff` varchar(200) NOT NULL,
-  `postion_staff` varchar(200) NOT NULL,
-  `basicsalary_staff` float NOT NULL
+  `image` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblsupplier`
+-- Table structure for table `tbl_object`
 --
 
-CREATE TABLE `tblsupplier` (
-  `id_supplier` varchar(50) NOT NULL,
-  `name_supplier` varchar(200) NOT NULL,
-  `address_supplier` varchar(2000) NOT NULL,
-  `phone_supplier` varchar(200) NOT NULL,
-  `email_supplier` varchar(200) NOT NULL
+CREATE TABLE `tbl_object` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order`
+--
+
+CREATE TABLE `tbl_order` (
+  `id` varchar(50) NOT NULL,
+  `date_order` date NOT NULL,
+  `name_warehouse` varchar(200) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order_info`
+--
+
+CREATE TABLE `tbl_order_info` (
+  `id` varchar(50) NOT NULL,
+  `id_order` varchar(50) NOT NULL,
+  `id_product_info` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `retail_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product`
+--
+
+CREATE TABLE `tbl_product` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `price` int(11) NOT NULL,
+  `description` varchar(2000) NOT NULL,
+  `like__product` int(11) NOT NULL,
+  `dislike_product` int(11) NOT NULL,
+  `id_category` varchar(50) NOT NULL,
+  `image` varchar(2000) NOT NULL,
+  `id_product_info` varchar(50) NOT NULL,
+  `id_promotion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product_info`
+--
+
+CREATE TABLE `tbl_product_info` (
+  `id` varchar(50) NOT NULL,
+  `id_product` varchar(50) NOT NULL,
+  `id_size` varchar(50) NOT NULL,
+  `id_color` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_promotion`
+--
+
+CREATE TABLE `tbl_promotion` (
+  `id` int(11) NOT NULL,
+  `name` varchar(2000) NOT NULL,
+  `date_start` date NOT NULL,
+  `date_end` date NOT NULL,
+  `desciption` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_rating`
+--
+
+CREATE TABLE `tbl_rating` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_rating_info`
+--
+
+CREATE TABLE `tbl_rating_info` (
+  `id` varchar(50) NOT NULL,
+  `id_rating` varchar(50) NOT NULL,
+  `id_bill_info` varchar(50) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sectors`
+--
+
+CREATE TABLE `tbl_sectors` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `id_object` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_size`
+--
+
+CREATE TABLE `tbl_size` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_staff`
+--
+
+CREATE TABLE `tbl_staff` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `postion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -290,218 +284,219 @@ CREATE TABLE `tblsupplier` (
 --
 
 --
--- Indexes for table `tblbill`
+-- Indexes for table `tbl_bill`
 --
-ALTER TABLE `tblbill`
-  ADD PRIMARY KEY (`id_bill`),
+ALTER TABLE `tbl_bill`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_customer` (`id_customer`),
   ADD KEY `id_staff` (`id_staff`);
 
 --
--- Indexes for table `tblbillinfo`
+-- Indexes for table `tbl_bill_info`
 --
-ALTER TABLE `tblbillinfo`
-  ADD PRIMARY KEY (`id_billinfo`),
+ALTER TABLE `tbl_bill_info`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_bill` (`id_bill`),
-  ADD KEY `id_product` (`id_product`);
+  ADD KEY `id_product_info` (`id_product_info`);
 
 --
--- Indexes for table `tblcategory`
+-- Indexes for table `tbl_category`
 --
-ALTER TABLE `tblcategory`
-  ADD PRIMARY KEY (`id_Category`),
-  ADD KEY `id_Sectors` (`id_Sectors`);
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_sectors` (`id_sectors`);
 
 --
--- Indexes for table `tblcolor`
+-- Indexes for table `tbl_color`
 --
-ALTER TABLE `tblcolor`
-  ADD PRIMARY KEY (`id_color`);
+ALTER TABLE `tbl_color`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblcustomer`
+-- Indexes for table `tbl_customer`
 --
-ALTER TABLE `tblcustomer`
-  ADD PRIMARY KEY (`id_customer`);
+ALTER TABLE `tbl_customer`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblimportproduct`
+-- Indexes for table `tbl_import`
 --
-ALTER TABLE `tblimportproduct`
-  ADD PRIMARY KEY (`id_importproduct`),
+ALTER TABLE `tbl_import`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_order` (`id_order`);
 
 --
--- Indexes for table `tblimportproductinfo`
+-- Indexes for table `tbl_import_info`
 --
-ALTER TABLE `tblimportproductinfo`
-  ADD PRIMARY KEY (`id_importproductinfo`),
-  ADD KEY `id_orderinfo` (`id_orderinfo`),
-  ADD KEY `id_importproduct` (`id_importproduct`);
+ALTER TABLE `tbl_import_info`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_import` (`id_import`),
+  ADD KEY `id_order_info` (`id_order_info`),
+  ADD KEY `id_product_info` (`id_product_info`);
 
 --
--- Indexes for table `tblnew`
+-- Indexes for table `tbl_news`
 --
-ALTER TABLE `tblnew`
-  ADD PRIMARY KEY (`id_new`),
-  ADD KEY `id_photo` (`id_photo`);
+ALTER TABLE `tbl_news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_staff` (`id_staff`);
 
 --
--- Indexes for table `tblobject`
+-- Indexes for table `tbl_object`
 --
-ALTER TABLE `tblobject`
-  ADD PRIMARY KEY (`id_Object`);
+ALTER TABLE `tbl_object`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblorder`
+-- Indexes for table `tbl_order`
 --
-ALTER TABLE `tblorder`
-  ADD PRIMARY KEY (`id_order`),
-  ADD KEY `id_supplier` (`id_supplier`);
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblorderinfo`
+-- Indexes for table `tbl_order_info`
 --
-ALTER TABLE `tblorderinfo`
-  ADD PRIMARY KEY (`id_orderinfo`),
+ALTER TABLE `tbl_order_info`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_order` (`id_order`),
-  ADD KEY `id_product` (`id_product`);
+  ADD KEY `id_product_info` (`id_product_info`);
 
 --
--- Indexes for table `tblphoto`
+-- Indexes for table `tbl_product`
 --
-ALTER TABLE `tblphoto`
-  ADD PRIMARY KEY (`id_photo`);
+ALTER TABLE `tbl_product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_category` (`id_category`),
+  ADD KEY `id_product_info` (`id_product_info`),
+  ADD KEY `id_promotion` (`id_promotion`);
 
 --
--- Indexes for table `tblproduct`
+-- Indexes for table `tbl_product_info`
 --
-ALTER TABLE `tblproduct`
-  ADD PRIMARY KEY (`id_product`),
-  ADD KEY `id_Category` (`id_Category`),
-  ADD KEY `id_promotion` (`id_promotion`),
+ALTER TABLE `tbl_product_info`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_color` (`id_color`),
-  ADD KEY `id_photo` (`id_photo`),
+  ADD KEY `id_product` (`id_product`),
   ADD KEY `id_size` (`id_size`);
 
 --
--- Indexes for table `tblpromotion`
+-- Indexes for table `tbl_promotion`
 --
-ALTER TABLE `tblpromotion`
-  ADD PRIMARY KEY (`id_promotion`);
+ALTER TABLE `tbl_promotion`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblrating`
+-- Indexes for table `tbl_rating`
 --
-ALTER TABLE `tblrating`
-  ADD PRIMARY KEY (`id_rating`),
-  ADD KEY `id_customer` (`id_customer`),
-  ADD KEY `id_product` (`id_product`);
+ALTER TABLE `tbl_rating`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblsectors`
+-- Indexes for table `tbl_rating_info`
 --
-ALTER TABLE `tblsectors`
-  ADD PRIMARY KEY (`id_Sectors`),
-  ADD KEY `id_Object` (`id_Object`);
+ALTER TABLE `tbl_rating_info`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_bill_info` (`id_bill_info`),
+  ADD KEY `id_rating` (`id_rating`);
 
 --
--- Indexes for table `tblsize`
+-- Indexes for table `tbl_sectors`
 --
-ALTER TABLE `tblsize`
-  ADD PRIMARY KEY (`id_size`);
+ALTER TABLE `tbl_sectors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_object` (`id_object`);
 
 --
--- Indexes for table `tblstaff`
+-- Indexes for table `tbl_size`
 --
-ALTER TABLE `tblstaff`
-  ADD PRIMARY KEY (`id_staff`);
+ALTER TABLE `tbl_size`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblsupplier`
+-- Indexes for table `tbl_staff`
 --
-ALTER TABLE `tblsupplier`
-  ADD PRIMARY KEY (`id_supplier`);
+ALTER TABLE `tbl_staff`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `tblbill`
+-- Constraints for table `tbl_bill`
 --
-ALTER TABLE `tblbill`
-  ADD CONSTRAINT `tblbill_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `tblcustomer` (`id_customer`),
-  ADD CONSTRAINT `tblbill_ibfk_2` FOREIGN KEY (`id_staff`) REFERENCES `tblstaff` (`id_staff`);
+ALTER TABLE `tbl_bill`
+  ADD CONSTRAINT `tbl_bill_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `tbl_customer` (`id`),
+  ADD CONSTRAINT `tbl_bill_ibfk_2` FOREIGN KEY (`id_staff`) REFERENCES `tbl_staff` (`id`);
 
 --
--- Constraints for table `tblbillinfo`
+-- Constraints for table `tbl_bill_info`
 --
-ALTER TABLE `tblbillinfo`
-  ADD CONSTRAINT `tblbillinfo_ibfk_1` FOREIGN KEY (`id_bill`) REFERENCES `tblbill` (`id_bill`),
-  ADD CONSTRAINT `tblbillinfo_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `tblproduct` (`id_product`);
+ALTER TABLE `tbl_bill_info`
+  ADD CONSTRAINT `tbl_bill_info_ibfk_1` FOREIGN KEY (`id_bill`) REFERENCES `tbl_bill` (`id`),
+  ADD CONSTRAINT `tbl_bill_info_ibfk_2` FOREIGN KEY (`id_product_info`) REFERENCES `tbl_product_info` (`id`);
 
 --
--- Constraints for table `tblcategory`
+-- Constraints for table `tbl_category`
 --
-ALTER TABLE `tblcategory`
-  ADD CONSTRAINT `tblcategory_ibfk_1` FOREIGN KEY (`id_Sectors`) REFERENCES `tblsectors` (`id_Sectors`);
+ALTER TABLE `tbl_category`
+  ADD CONSTRAINT `tbl_category_ibfk_1` FOREIGN KEY (`id_sectors`) REFERENCES `tbl_sectors` (`id`);
 
 --
--- Constraints for table `tblimportproduct`
+-- Constraints for table `tbl_import`
 --
-ALTER TABLE `tblimportproduct`
-  ADD CONSTRAINT `tblimportproduct_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `tblorder` (`id_order`);
+ALTER TABLE `tbl_import`
+  ADD CONSTRAINT `tbl_import_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `tbl_order` (`id`);
 
 --
--- Constraints for table `tblimportproductinfo`
+-- Constraints for table `tbl_import_info`
 --
-ALTER TABLE `tblimportproductinfo`
-  ADD CONSTRAINT `tblimportproductinfo_ibfk_1` FOREIGN KEY (`id_orderinfo`) REFERENCES `tblorderinfo` (`id_orderinfo`),
-  ADD CONSTRAINT `tblimportproductinfo_ibfk_2` FOREIGN KEY (`id_importproduct`) REFERENCES `tblimportproduct` (`id_importproduct`);
+ALTER TABLE `tbl_import_info`
+  ADD CONSTRAINT `tbl_import_info_ibfk_1` FOREIGN KEY (`id_import`) REFERENCES `tbl_import` (`id`),
+  ADD CONSTRAINT `tbl_import_info_ibfk_2` FOREIGN KEY (`id_order_info`) REFERENCES `tbl_order_info` (`id`),
+  ADD CONSTRAINT `tbl_import_info_ibfk_3` FOREIGN KEY (`id_product_info`) REFERENCES `tbl_product_info` (`id`);
 
 --
--- Constraints for table `tblnew`
+-- Constraints for table `tbl_news`
 --
-ALTER TABLE `tblnew`
-  ADD CONSTRAINT `tblnew_ibfk_1` FOREIGN KEY (`id_photo`) REFERENCES `tblphoto` (`id_photo`),
-  ADD CONSTRAINT `tblnew_ibfk_2` FOREIGN KEY (`id_photo`) REFERENCES `tblstaff` (`id_staff`);
+ALTER TABLE `tbl_news`
+  ADD CONSTRAINT `tbl_news_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `tbl_staff` (`id`);
 
 --
--- Constraints for table `tblorder`
+-- Constraints for table `tbl_order_info`
 --
-ALTER TABLE `tblorder`
-  ADD CONSTRAINT `tblorder_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `tblsupplier` (`id_supplier`);
+ALTER TABLE `tbl_order_info`
+  ADD CONSTRAINT `tbl_order_info_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `tbl_order` (`id`),
+  ADD CONSTRAINT `tbl_order_info_ibfk_2` FOREIGN KEY (`id_product_info`) REFERENCES `tbl_product_info` (`id`);
 
 --
--- Constraints for table `tblorderinfo`
+-- Constraints for table `tbl_product`
 --
-ALTER TABLE `tblorderinfo`
-  ADD CONSTRAINT `tblorderinfo_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `tblorder` (`id_order`),
-  ADD CONSTRAINT `tblorderinfo_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `tblproduct` (`id_product`);
+ALTER TABLE `tbl_product`
+  ADD CONSTRAINT `tbl_product_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `tbl_category` (`id`),
+  ADD CONSTRAINT `tbl_product_ibfk_2` FOREIGN KEY (`id_product_info`) REFERENCES `tbl_product_info` (`id`),
+  ADD CONSTRAINT `tbl_product_ibfk_3` FOREIGN KEY (`id_promotion`) REFERENCES `tbl_promotion` (`id`);
 
 --
--- Constraints for table `tblproduct`
+-- Constraints for table `tbl_product_info`
 --
-ALTER TABLE `tblproduct`
-  ADD CONSTRAINT `tblproduct_ibfk_1` FOREIGN KEY (`id_Category`) REFERENCES `tblcategory` (`id_Category`),
-  ADD CONSTRAINT `tblproduct_ibfk_2` FOREIGN KEY (`id_promotion`) REFERENCES `tblpromotion` (`id_promotion`),
-  ADD CONSTRAINT `tblproduct_ibfk_3` FOREIGN KEY (`id_color`) REFERENCES `tblcolor` (`id_color`),
-  ADD CONSTRAINT `tblproduct_ibfk_4` FOREIGN KEY (`id_photo`) REFERENCES `tblphoto` (`id_photo`),
-  ADD CONSTRAINT `tblproduct_ibfk_5` FOREIGN KEY (`id_size`) REFERENCES `tblsize` (`id_size`);
+ALTER TABLE `tbl_product_info`
+  ADD CONSTRAINT `tbl_product_info_ibfk_1` FOREIGN KEY (`id_color`) REFERENCES `tbl_color` (`id`),
+  ADD CONSTRAINT `tbl_product_info_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `tbl_product` (`id`),
+  ADD CONSTRAINT `tbl_product_info_ibfk_3` FOREIGN KEY (`id_size`) REFERENCES `tbl_size` (`id`);
 
 --
--- Constraints for table `tblrating`
+-- Constraints for table `tbl_rating_info`
 --
-ALTER TABLE `tblrating`
-  ADD CONSTRAINT `tblrating_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `tblcustomer` (`id_customer`),
-  ADD CONSTRAINT `tblrating_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `tblproduct` (`id_product`);
+ALTER TABLE `tbl_rating_info`
+  ADD CONSTRAINT `tbl_rating_info_ibfk_1` FOREIGN KEY (`id_bill_info`) REFERENCES `tbl_bill_info` (`id`),
+  ADD CONSTRAINT `tbl_rating_info_ibfk_2` FOREIGN KEY (`id_rating`) REFERENCES `tbl_rating` (`id`);
 
 --
--- Constraints for table `tblsectors`
+-- Constraints for table `tbl_sectors`
 --
-ALTER TABLE `tblsectors`
-  ADD CONSTRAINT `tblsectors_ibfk_1` FOREIGN KEY (`id_Object`) REFERENCES `tblobject` (`id_Object`);
+ALTER TABLE `tbl_sectors`
+  ADD CONSTRAINT `tbl_sectors_ibfk_1` FOREIGN KEY (`id_object`) REFERENCES `tbl_object` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
