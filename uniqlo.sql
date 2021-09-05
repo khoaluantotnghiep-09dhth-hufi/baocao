@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2021 at 03:55 PM
+-- Generation Time: Sep 05, 2021 at 11:13 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -293,13 +293,17 @@ CREATE TABLE `tblsupplier` (
 -- Indexes for table `tblbill`
 --
 ALTER TABLE `tblbill`
-  ADD PRIMARY KEY (`id_bill`);
+  ADD PRIMARY KEY (`id_bill`),
+  ADD KEY `id_customer` (`id_customer`),
+  ADD KEY `id_staff` (`id_staff`);
 
 --
 -- Indexes for table `tblbillinfo`
 --
 ALTER TABLE `tblbillinfo`
-  ADD PRIMARY KEY (`id_billinfo`);
+  ADD PRIMARY KEY (`id_billinfo`),
+  ADD KEY `id_bill` (`id_bill`),
+  ADD KEY `id_product` (`id_product`);
 
 --
 -- Indexes for table `tblcategory`
@@ -422,6 +426,20 @@ ALTER TABLE `tblsupplier`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tblbill`
+--
+ALTER TABLE `tblbill`
+  ADD CONSTRAINT `tblbill_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `tblcustomer` (`id_customer`),
+  ADD CONSTRAINT `tblbill_ibfk_2` FOREIGN KEY (`id_staff`) REFERENCES `tblstaff` (`id_staff`);
+
+--
+-- Constraints for table `tblbillinfo`
+--
+ALTER TABLE `tblbillinfo`
+  ADD CONSTRAINT `tblbillinfo_ibfk_1` FOREIGN KEY (`id_bill`) REFERENCES `tblbill` (`id_bill`),
+  ADD CONSTRAINT `tblbillinfo_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `tblproduct` (`id_product`);
 
 --
 -- Constraints for table `tblcategory`
