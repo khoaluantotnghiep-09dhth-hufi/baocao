@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2021 at 04:53 PM
+-- Generation Time: Sep 06, 2021 at 08:59 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -180,12 +180,24 @@ CREATE TABLE `tbl_product` (
   `name` varchar(500) NOT NULL,
   `price` int(11) NOT NULL,
   `description` varchar(2000) NOT NULL,
-  `like__product` int(11) NOT NULL,
+  `like_product` int(11) NOT NULL,
   `dislike_product` int(11) NOT NULL,
   `id_category` varchar(50) NOT NULL,
   `image` varchar(2000) NOT NULL,
   `id_product_info` varchar(50) NOT NULL,
   `id_promotion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product_exchange`
+--
+
+CREATE TABLE `tbl_product_exchange` (
+  `id` varchar(50) NOT NULL,
+  `id_bill_info` varchar(50) NOT NULL,
+  `reason` varchar(2000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -371,6 +383,13 @@ ALTER TABLE `tbl_product`
   ADD KEY `id_promotion` (`id_promotion`);
 
 --
+-- Indexes for table `tbl_product_exchange`
+--
+ALTER TABLE `tbl_product_exchange`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_bill_info` (`id_bill_info`);
+
+--
 -- Indexes for table `tbl_product_info`
 --
 ALTER TABLE `tbl_product_info`
@@ -476,6 +495,12 @@ ALTER TABLE `tbl_product`
   ADD CONSTRAINT `tbl_product_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `tbl_category` (`id`),
   ADD CONSTRAINT `tbl_product_ibfk_2` FOREIGN KEY (`id_product_info`) REFERENCES `tbl_product_info` (`id`),
   ADD CONSTRAINT `tbl_product_ibfk_3` FOREIGN KEY (`id_promotion`) REFERENCES `tbl_promotion` (`id`);
+
+--
+-- Constraints for table `tbl_product_exchange`
+--
+ALTER TABLE `tbl_product_exchange`
+  ADD CONSTRAINT `tbl_product_exchange_ibfk_1` FOREIGN KEY (`id_bill_info`) REFERENCES `tbl_bill_info` (`id`);
 
 --
 -- Constraints for table `tbl_product_info`
