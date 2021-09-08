@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2021 at 01:46 PM
+-- Generation Time: Sep 08, 2021 at 02:03 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -149,12 +149,20 @@ CREATE TABLE `tbl_import_info` (
 
 CREATE TABLE `tbl_news` (
   `id` varchar(50) NOT NULL,
-  `name` text DEFAULT NULL,
+  `title` text DEFAULT NULL,
   `date` date DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `id_staff` varchar(50) NOT NULL,
-  `image` text DEFAULT NULL
+  `id_staff` varchar(50) DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `sub_titile` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_news`
+--
+
+INSERT INTO `tbl_news` (`id`, `title`, `date`, `description`, `id_staff`, `image`, `sub_titile`) VALUES
+('news-1', 'UNIQLO ĐỒNG HÀNH CÙNG CỘNG ĐỒNG, CHUNG SỨC ĐẨY LÙI ĐẠI DỊCH COVID-19', '0000-00-00', 'Với cam kết mang đến những đóng góp tích cực, lâu dài cho con người và xã hội Việt Nam,\nngày Té/7 vừa qua, tập đoàn Fast Retailing, thông qua công ty UNIQLO Việt Nam và công ty\nFast Retailing Việt Nam, đã đóng góp 11 tỷ đồng vào Quỹ vắc xin phòng, chống COVID-19 tại\nViệt Nam. Thông qua sự phổi hợp cùng Bộ Tài chính, cơ quan chịu trách nhiệm quản tý hoạt\nđộng của quỹ, phẩn đóng góp này sẽ được sử dụng để hỗ trợ trong quá trình mua, nhập khẩu\nvắc xin cũng như các hoạt động nghiên cứu, phát triển và sản xuất vắc xin trong nước. Bên\ncạnh đó, tập đoàn Fast Retaiing cũng đang triển khai hoạt động đóng góp 30.000 sản phẩm\nAlRism và DRY-EX từ UNIQLO. Với sự phối hợp của Mặt trận Tổ quốc Việt Nam, những sản\nphẩm này sẽ được gửi tặng đội ngũ nhân viên y tế, tình nguyện viên tại các cơ sở y tế tuyến\nđầu hoặc các vùng, khu vực trọng điểm cẩn hỗ trợ cao.\n\n   \n\nBỘ TÀI CHÍNH\nBAN QUAN LÝ 0UY VÄC-XIN PHONG, CHŨNG C0VID-19\n\nLỄ T IẬN\nÈ QUY VÃC-XIN ¬ế, cho\n\nl EudjA (4\n\n \n\nThông qua công ty UNIQLO Việt Nam và công ty Fast Retailng Việt Nam,\nđã đóng góp 11 tỷ đổng vào Quỹ vắc xin phòng, chống COVID-19 tại Việt Nam.\n\n \n\nVề đóng góp ý nghĩa này, ông Osamu lkezoe, Tổng Giám đốc UNIQLO Việt Nam, chia sẻ: ”UNIQLO cùng tập đoàn\nFast Retailing luôn cam kết mang đến những đóng góp tích cực lâu dài cho con người và xã hội Việt Nam. Chúng\ntôi cảm thấy vô cùng ý nghĩa khi có thể trở thành một phần trong nỗ lực chung của tất cả mọi người dân tại Việt\nNam để cùng vượt qua đại dịch COVID-19 và hy vọng rằng phần đóng góp của chúng tôi cho Quỹ vắc xin phòng,\nchống COVID-19 sẽ mang đến sự rợ cần thiết cho những nỗ lực này. Chúng tôi tin tưởng rằng bằng sự chung\nsức của mỗi cá nhân, doanh nghiệp, tổ chức trên cả nước, chúng †a sẽ cùng nhau vượt qua và chiến thắng đại\ndịch COVID-19”.\n\n \n\nBên cạnh việc ủng hộ 11 tỷ đồng vào Quỹ vắc xin phòng, chống COVID-19, UNIQLO đã và đang phối hợp cùng Mặt\ntrận Tổ quốc Việt Nam và Quỹ Hy Vọng trao tặng hơn 30.000 sản phẩm AlRism và DRY-EX với tổng giá trị lên\nđến 11 tỷ đồng đến các nhân viên y tế, tình nguyện viên tuyển đầu đang điều trị và hỗ trợ bệnh nhân COVID-]9.\nCác sản phẩm AlRism và DRY-EX từ UNIQLO với công nghệ độc quyển mang đến sự khô thoáng, thẩm hút mồ\nhôi tốt sẽ hỗ trợ nhân viên y tế và tình nguyện viên cảm thấy thoải mái hơn khi phải mặc trang phục bảo hộ nhiều.\nlớp trong quá trình làm nhiệm vụ.\n\n \n\nUNIQLO đã và đang phổi hợp cùng Mặt trận Tổ quốc Việt Nam và Quỹ Hy Vọng để trao tặng hơn\n30.000 sản phẩm AlRism và DRYEX đến các nhân viên y tế, tình nguyện viên tuyến đầu\nđang điều trị và hỗ trợ bệnh nhân C0VID—]9.\n\nDưới sự chỉ đạo của Chính phủ, Quỹ vắc xin phòng, chống COVID-19 đã được triển khai như một giải pháp mang\ntính tiên quyết, lâu dài và chiến lược để cả nước cùng vượt qua đại dịch COVID-19 với mục tiêu 70% người dân tại\nViệt Nam sẽ được tiêm chủng vắc xin trong năm nay. Ngay từ khi được triển khai, Quỹ đã tiếp nhận sự hỗ trợ từ\nvô số cá nhân, doanh nghiệp và tổ chức. Hoạt động được Fast Retailing tiến hành lần này là một phần trong cam\nkết của tập đoàn hướng đến việc mang đến những đóng góp lâu dài và tích cực cho cộng đồng.', 'staff-1', 'https://www.uniqlo.com/vn/top/img/topic/20210722_1826_gl6781.jpg', '');
 
 -- --------------------------------------------------------
 
