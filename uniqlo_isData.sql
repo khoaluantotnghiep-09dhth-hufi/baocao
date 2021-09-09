@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 08, 2021 at 02:03 PM
+-- Host: 127.0.0.1:3306
+-- Generation Time: Sep 09, 2021 at 12:25 PM
 -- Server version: 10.4.20-MariaDB
--- PHP Version: 7.4.22
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test1`
+-- Database: `uniqlo`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,14 @@ CREATE TABLE `tbl_bill` (
   `status` tinyint(1) DEFAULT 0,
   `id_customer` varchar(50) NOT NULL,
   `id_staff` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
+
+--
+-- Dumping data for table `tbl_bill`
+--
+
+INSERT INTO `tbl_bill` (`id`, `date`, `total`, `status`, `id_customer`, `id_staff`) VALUES
+('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1');
 
 -- --------------------------------------------------------
 
@@ -48,7 +55,29 @@ CREATE TABLE `tbl_bill_info` (
   `id_product_info` varchar(50) NOT NULL,
   `into_money` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
+
+--
+-- Dumping data for table `tbl_bill_info`
+--
+
+INSERT INTO `tbl_bill_info` (`id`, `id_bill`, `id_product_info`, `into_money`, `quantity`) VALUES
+('bill-info-1', 'bill-1', 'product-info-1', 140000, 4),
+('bill-info-2', 'bill-1', 'product-info-1', 140000, 1),
+('bill-info-3', 'bill-1', 'product-info-1', 140000, 3),
+('bill-info-4', 'bill-1', 'product-info-1', 140000, 3);
+
+--
+-- Triggers `tbl_bill_info`
+--
+DELIMITER $$
+CREATE TRIGGER `repair_bill_info_product` BEFORE UPDATE ON `tbl_bill_info` FOR EACH ROW UPDATE tbl_product_info set quantity = quantity + old.quantity - new.quantity WHERE id = old.id_product_info
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_quantity_product_info` AFTER INSERT ON `tbl_bill_info` FOR EACH ROW update tbl_product_info set quantity = quantity - new.quantity where id = new.id_product_info
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +154,7 @@ CREATE TABLE `tbl_import` (
   `date_import` date DEFAULT NULL,
   `id_order` varchar(50) NOT NULL,
   `total_import` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 -- --------------------------------------------------------
 
@@ -139,7 +168,7 @@ CREATE TABLE `tbl_import_info` (
   `id_order_info` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `id_product_info` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 -- --------------------------------------------------------
 
@@ -210,7 +239,7 @@ CREATE TABLE `tbl_order_info` (
   `id_product_info` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `retail_price` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 -- --------------------------------------------------------
 
@@ -228,7 +257,7 @@ CREATE TABLE `tbl_product` (
   `id_category` varchar(50) NOT NULL,
   `image` text DEFAULT NULL,
   `id_promotion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `tbl_product`
@@ -265,17 +294,17 @@ CREATE TABLE `tbl_product_info` (
   `id_size` varchar(50) NOT NULL,
   `id_color` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `tbl_product_info`
 --
 
 INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quantity`) VALUES
-('product-info-1', 'product-1', 'size-S', 'color-1', 1),
-('product-info-2', 'product-1', 'size-M', 'color-2', 1),
-('product-info-3', 'product-2', 'size-M', 'color-2', 3),
-('product-info-4', 'product-4', 'size-XL', 'color-2', 3),
+('product-info-1', 'product-1', 'size-S', 'color-1', 3),
+('product-info-2', 'product-1', 'size-M', 'color-2', 10),
+('product-info-3', 'product-2', 'size-M', 'color-2', 10),
+('product-info-4', 'product-4', 'size-XL', 'color-2', 2),
 ('product-info-5', 'product-1', 'size-M', 'color-2', 3);
 
 -- --------------------------------------------------------
@@ -290,7 +319,7 @@ CREATE TABLE `tbl_promotion` (
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
   `desciption` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dumping data for table `tbl_promotion`
