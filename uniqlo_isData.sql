@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 09, 2021 at 12:25 PM
+-- Generation Time: Sep 14, 2021 at 12:46 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -33,15 +33,19 @@ CREATE TABLE `tbl_bill` (
   `total` double DEFAULT NULL,
   `status` tinyint(1) DEFAULT 0,
   `id_customer` varchar(50) NOT NULL,
-  `id_staff` varchar(50) NOT NULL
+  `id_staff` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL
 ) ;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
-INSERT INTO `tbl_bill` (`id`, `date`, `total`, `status`, `id_customer`, `id_staff`) VALUES
-('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1');
+INSERT INTO `tbl_bill` (`id`, `date`, `total`, `status`, `id_customer`, `id_staff`, `address`, `email`, `phone`, `name`) VALUES
+('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -97,7 +101,8 @@ CREATE TABLE `tbl_category` (
 
 INSERT INTO `tbl_category` (`id`, `name`, `id_sectors`) VALUES
 ('category-1', 'Giá Mới', 'selector-1'),
-('category-2', 'Hàng Mới Về', 'selector-1');
+('category-2', 'Hàng Mới Về', 'selector-1'),
+('category-4', 'hàng vừa update', 'selector-1');
 
 -- --------------------------------------------------------
 
@@ -118,7 +123,8 @@ INSERT INTO `tbl_color` (`id`, `name`) VALUES
 ('color-1', 'Red'),
 ('color-2', 'Blue'),
 ('color-3', 'Pink'),
-('color-4', 'Orange');
+('color-4', 'Orange'),
+('color-5', 'Test update');
 
 -- --------------------------------------------------------
 
@@ -268,7 +274,17 @@ INSERT INTO `tbl_product` (`id`, `name`, `price`, `description`, `like_product`,
 ('product-2', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442141/item/15_442141.jpg', 0),
 ('product-3', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442139/item/00_442139.jpg', 0),
 ('product-4', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442138/item/09_442138.jpg', 0),
-('product-5', 'NỮ UT PEANUTS Vintage Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/438724/item/09_438724.jpg', 0);
+('product-5', 'NỮ UT PEANUTS Vintage Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/438724/item/09_438724.jpg', 0),
+('product-6a', 'sda', 1500000, 'ádsa', 1, 0, 'category-1', 'ád', 0);
+
+--
+-- Triggers `tbl_product`
+--
+DELIMITER $$
+CREATE TRIGGER `auto_insert_product_info` AFTER INSERT ON `tbl_product` FOR EACH ROW INSERT INTO tbl_product_info(`id`,`id_product`,`id_size`,`id_color`,`quantity`)
+VALUES ('product-info-6',new.id,'size-L','color-1',15)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -305,7 +321,7 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-2', 'product-1', 'size-M', 'color-2', 10),
 ('product-info-3', 'product-2', 'size-M', 'color-2', 10),
 ('product-info-4', 'product-4', 'size-XL', 'color-2', 2),
-('product-info-5', 'product-1', 'size-M', 'color-2', 3);
+('product-info-6', 'product-6a', 'size-L', 'color-1', 15);
 
 -- --------------------------------------------------------
 
