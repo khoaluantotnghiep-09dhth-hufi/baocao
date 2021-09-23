@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 01:51 PM
+-- Generation Time: Sep 23, 2021 at 04:20 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -216,15 +216,25 @@ CREATE TABLE `tbl_import` (
   `id` varchar(50) NOT NULL,
   `date_import` date DEFAULT NULL,
   `id_order` varchar(50) NOT NULL,
-  `total_import` float DEFAULT NULL
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_import`
 --
 
-INSERT INTO `tbl_import` (`id`, `date_import`, `id_order`, `total_import`) VALUES
-('import-1', '2021-09-23', 'order-1', 150000);
+INSERT INTO `tbl_import` (`id`, `date_import`, `id_order`, `status`) VALUES
+('bill-info-4', '2021-09-23', 'order-ktwxrk2d', 0),
+('import-1', '2021-09-23', 'order-1', 0),
+('import-2', '2021-09-23', 'order-ktuyj8q9', 1);
+
+--
+-- Triggers `tbl_import`
+--
+DELIMITER $$
+CREATE TRIGGER `update_status_order` BEFORE INSERT ON `tbl_import` FOR EACH ROW UPDATE tbl_order set status = 1
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -239,6 +249,13 @@ CREATE TABLE `tbl_import_info` (
   `quantity` int(11) DEFAULT NULL,
   `id_product_info` varchar(50) NOT NULL
 ) ;
+
+--
+-- Dumping data for table `tbl_import_info`
+--
+
+INSERT INTO `tbl_import_info` (`id`, `id_import`, `id_order_info`, `quantity`, `id_product_info`) VALUES
+('import-info-1', 'import-1', 'order-info-ktuyjml9', 10, 'product-info-ktunkest');
 
 -- --------------------------------------------------------
 
@@ -309,8 +326,9 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`id`, `date_order`, `name_warehouse`, `status`) VALUES
-('order-1', '2021-09-22', 'Kho HCM', 0),
-('order-ktuyj8q9', '2021-09-22', 'Kho Đà Nẵng', 1);
+('order-1', '2021-09-22', 'Kho HCM', 1),
+('order-ktuyj8q9', '2021-09-22', 'Kho Đà Nẵng', 1),
+('order-ktwxrk2d', '2021-09-23', 'Kho Đà Nẵng', 1);
 
 -- --------------------------------------------------------
 
@@ -322,18 +340,20 @@ CREATE TABLE `tbl_order_info` (
   `id` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
   `id_product_info` varchar(50) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `retail_price` double DEFAULT NULL
+  `quantity` int(11) DEFAULT NULL
 ) ;
 
 --
 -- Dumping data for table `tbl_order_info`
 --
 
-INSERT INTO `tbl_order_info` (`id`, `id_order`, `id_product_info`, `quantity`, `retail_price`) VALUES
-('order-info-ktuyjml9', 'order-ktuyj8q9', 'product-info-52', 2, 140000),
-('order-info-ktuyjpf6', 'order-ktuyj8q9', 'product-info-81', 3, 140000),
-('order-info-ktwhlzfj', 'order-ktuyj8q9', 'product-info-52', 1, 14000);
+INSERT INTO `tbl_order_info` (`id`, `id_order`, `id_product_info`, `quantity`) VALUES
+('order-info-ktuyjml9', 'order-ktuyj8q9', 'product-info-52', 2),
+('order-info-ktuyjpf6', 'order-ktuyj8q9', 'product-info-81', 3),
+('order-info-ktwhlzfj', 'order-ktuyj8q9', 'product-info-52', 1),
+('order-info-ktwvqvgm', 'order-1', 'product-info-ktwvbur4', 10),
+('order-info-ktwvr2s9', 'order-1', 'product-info-ktwv9ey3', 13),
+('order-info-ktwxifeg', 'order-1', 'product-info-ktwvf76j', 10);
 
 -- --------------------------------------------------------
 
