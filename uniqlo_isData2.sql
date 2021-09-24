@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 04:20 PM
+-- Generation Time: Sep 24, 2021 at 07:49 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -224,15 +224,13 @@ CREATE TABLE `tbl_import` (
 --
 
 INSERT INTO `tbl_import` (`id`, `date_import`, `id_order`, `status`) VALUES
-('bill-info-4', '2021-09-23', 'order-ktwxrk2d', 0),
-('import-1', '2021-09-23', 'order-1', 0),
-('import-2', '2021-09-23', 'order-ktuyj8q9', 1);
+('import-ktxxljxm', '2021-09-24', 'order-ktxxl38f', 0);
 
 --
 -- Triggers `tbl_import`
 --
 DELIMITER $$
-CREATE TRIGGER `update_status_order` BEFORE INSERT ON `tbl_import` FOR EACH ROW UPDATE tbl_order set status = 1
+CREATE TRIGGER `update_status_order` BEFORE INSERT ON `tbl_import` FOR EACH ROW UPDATE tbl_order set status = 1 WHERE id= new.id_order
 $$
 DELIMITER ;
 
@@ -255,7 +253,20 @@ CREATE TABLE `tbl_import_info` (
 --
 
 INSERT INTO `tbl_import_info` (`id`, `id_import`, `id_order_info`, `quantity`, `id_product_info`) VALUES
-('import-info-1', 'import-1', 'order-info-ktuyjml9', 10, 'product-info-ktunkest');
+('import-info-ktxxlsmj', 'import-ktxxljxm', 'order-info-ktxxld3z', 3, 'product-info-ktwv8kj1'),
+('import-info-ktxxm66b', 'import-ktxxljxm', 'order-info-ktxxl83z', 3, 'product-info-ktwv8gf8');
+
+--
+-- Triggers `tbl_import_info`
+--
+DELIMITER $$
+CREATE TRIGGER `setStatus` BEFORE INSERT ON `tbl_import_info` FOR EACH ROW UPDATE tbl_order_info set status = 1 WHERE id= new.id_order_info
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_quantity_product_info_import` BEFORE INSERT ON `tbl_import_info` FOR EACH ROW UPDATE tbl_product_info set quantity = quantity + new.quantity WHERE id = new.id_product_info
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -326,9 +337,7 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`id`, `date_order`, `name_warehouse`, `status`) VALUES
-('order-1', '2021-09-22', 'Kho HCM', 1),
-('order-ktuyj8q9', '2021-09-22', 'Kho Đà Nẵng', 1),
-('order-ktwxrk2d', '2021-09-23', 'Kho Đà Nẵng', 1);
+('order-ktxxl38f', '2021-09-24', 'Kho Đà Nẵng', 1);
 
 -- --------------------------------------------------------
 
@@ -340,20 +349,17 @@ CREATE TABLE `tbl_order_info` (
   `id` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
   `id_product_info` varchar(50) NOT NULL,
-  `quantity` int(11) DEFAULT NULL
+  `quantity` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ;
 
 --
 -- Dumping data for table `tbl_order_info`
 --
 
-INSERT INTO `tbl_order_info` (`id`, `id_order`, `id_product_info`, `quantity`) VALUES
-('order-info-ktuyjml9', 'order-ktuyj8q9', 'product-info-52', 2),
-('order-info-ktuyjpf6', 'order-ktuyj8q9', 'product-info-81', 3),
-('order-info-ktwhlzfj', 'order-ktuyj8q9', 'product-info-52', 1),
-('order-info-ktwvqvgm', 'order-1', 'product-info-ktwvbur4', 10),
-('order-info-ktwvr2s9', 'order-1', 'product-info-ktwv9ey3', 13),
-('order-info-ktwxifeg', 'order-1', 'product-info-ktwvf76j', 10);
+INSERT INTO `tbl_order_info` (`id`, `id_order`, `id_product_info`, `quantity`, `status`) VALUES
+('order-info-ktxxl83z', 'order-ktxxl38f', 'product-info-ktwv8gf8', 3, 1),
+('order-info-ktxxld3z', 'order-ktxxl38f', 'product-info-ktwv8kj1', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -442,7 +448,7 @@ CREATE TABLE `tbl_product_info` (
 --
 
 INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quantity`) VALUES
-('bill-info-1', 'product-1', 'size-M', 'color-4', 1),
+('bill-info-1', 'product-1', 'size-M', 'color-4', 11),
 ('product-info-1', 'product-1', 'size-S', 'color-1', 1),
 ('product-info-5', 'product-1', 'size-L', 'color-2', 3),
 ('product-info-52', 'product-1', 'size-L', 'color-2', 12),
@@ -459,13 +465,13 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-ktwv7y24', 'product-ktwuwxta', 'size-XL', 'color-2', 4),
 ('product-info-ktwv83kn', 'product-ktwuwxta', 'size-XL', 'color-2', 3),
 ('product-info-ktwv87fq', 'product-ktwuxm91', 'size-S', 'color-3', 4),
-('product-info-ktwv8gf8', 'product-ktwuxm91', 'size-S', 'color-1', 4),
-('product-info-ktwv8kj1', 'product-ktwuxxxe', 'size-M', 'color-1', 2),
+('product-info-ktwv8gf8', 'product-ktwuxm91', 'size-S', 'color-1', 27),
+('product-info-ktwv8kj1', 'product-ktwuxxxe', 'size-M', 'color-1', 5),
 ('product-info-ktwv8p9x', 'product-ktwuxxxe', 'size-S', 'color-3', 4),
 ('product-info-ktwv8ula', 'product-ktwv0emj', 'size-S', 'color-2', 4),
 ('product-info-ktwv90yo', 'product-ktwv0emj', 'size-XXXL', 'color-4', 4),
 ('product-info-ktwv96i4', 'product-ktwv03t6', 'size-L', 'color-1', 4),
-('product-info-ktwv9ey3', 'product-ktwv03t6', 'size-S', 'color-1', 4),
+('product-info-ktwv9ey3', 'product-ktwv03t6', 'size-S', 'color-1', 8),
 ('product-info-ktwv9kjq', 'product-ktwuzufd', 'size-S', 'color-2', 3),
 ('product-info-ktwv9qqo', 'product-ktwuzufd', 'size-XXL', 'color-3', 4),
 ('product-info-ktwva0re', 'product-ktwuzi4r', 'size-M', 'color-2', 3),
