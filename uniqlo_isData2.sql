@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2021 at 07:49 AM
+-- Generation Time: Sep 24, 2021 at 07:58 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -639,7 +639,7 @@ CREATE TABLE `tbl_staff` (
   `phone` varchar(50) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `postion` text DEFAULT NULL,
+  `postion` int(11) DEFAULT NULL,
   `cmnn_cccc` text DEFAULT NULL,
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -649,7 +649,7 @@ CREATE TABLE `tbl_staff` (
 --
 
 INSERT INTO `tbl_staff` (`id`, `name`, `email`, `phone`, `address`, `password`, `postion`, `cmnn_cccc`, `image`) VALUES
-('staff-1', 'Trần Văn Hoàng', 'hoang232@gmail.com', '0902441254', '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'admin', 'Nhân Viên Bán Hàng', NULL, NULL);
+('staff-1', 'Trần Văn Hoàng', 'hoang232@gmail.com', '0902441254', '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'admin', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
