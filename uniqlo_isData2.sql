@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2021 at 08:01 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Generation Time: Sep 25, 2021 at 07:17 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uniqlo`
+-- Database: `test_2`
 --
 
 -- --------------------------------------------------------
@@ -66,7 +66,7 @@ CREATE TABLE `tbl_bill_info` (
   `id_product_info` varchar(50) NOT NULL,
   `into_money` double DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_bill_info`
@@ -195,16 +195,18 @@ CREATE TABLE `tbl_customer` (
   `phone` varchar(50) DEFAULT NULL,
   `image` text DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `email` text DEFAULT NULL
+  `email` text DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `cmnd_cccc` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_customer`
 --
 
-INSERT INTO `tbl_customer` (`id`, `name`, `address`, `phone`, `image`, `password`, `email`) VALUES
-('user-1', 'Nguyễn Thanh Huy', '1920,Phường 8,Quận Gò Vấp,Tp.HCM', '0902559431', '', 'thanhhuy456', 'huynguyen2913@gmail.com'),
-('user-2', 'Nguyễn Thị Thanh Toàn', 'HCM', 'admin', '', 'admin', 'thanhtian29123@gmail.com');
+INSERT INTO `tbl_customer` (`id`, `name`, `address`, `phone`, `image`, `password`, `email`, `gender`, `cmnd_cccc`) VALUES
+('user-1', 'Nguyễn Thanh Huy', '1920,Phường 8,Quận Gò Vấp,Tp.HCM', '0902559431', '', 'thanhhuy456', 'huynguyen2913@gmail.com', NULL, NULL),
+('user-2', 'Nguyễn Thị Thanh Toàn', 'HCM', 'admin', '', 'admin', 'thanhtian29123@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +248,7 @@ CREATE TABLE `tbl_import_info` (
   `id_order_info` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `id_product_info` varchar(50) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_import_info`
@@ -351,7 +353,7 @@ CREATE TABLE `tbl_order_info` (
   `id_product_info` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_order_info`
@@ -441,7 +443,7 @@ CREATE TABLE `tbl_product_info` (
   `id_size` varchar(50) NOT NULL,
   `id_color` varchar(50) NOT NULL,
   `quantity` int(11) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product_info`
@@ -519,7 +521,7 @@ CREATE TABLE `tbl_promotion` (
   `name` text DEFAULT NULL,
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
-  `desciption` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -527,7 +529,7 @@ CREATE TABLE `tbl_promotion` (
 -- Dumping data for table `tbl_promotion`
 --
 
-INSERT INTO `tbl_promotion` (`id`, `name`, `date_start`, `date_end`, `desciption`, `image`) VALUES
+INSERT INTO `tbl_promotion` (`id`, `name`, `date_start`, `date_end`, `description`, `image`) VALUES
 ('0', 'Chào Đón Noel An Lành', '2021-09-28', '2021-10-27', '0', NULL),
 ('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL);
 
@@ -635,22 +637,30 @@ INSERT INTO `tbl_size` (`id`, `name`) VALUES
 CREATE TABLE `tbl_staff` (
   `id` varchar(50) NOT NULL,
   `name` text DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `place_of_birth` text DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `cmnn_cccc` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `email` text DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `address` text DEFAULT NULL,
+  ` education_level` text DEFAULT NULL,
+  `certificate` text DEFAULT NULL,
+  `working_day` date DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `postion` text DEFAULT NULL,
-  `cmnn_cccc` text DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `note` text DEFAULT NULL,
+  `name_bank` text DEFAULT NULL,
+  `id_bank` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_staff`
 --
 
-INSERT INTO `tbl_staff` (`id`, `name`, `email`, `phone`, `address`, `password`, `postion`, `cmnn_cccc`, `image`, `role`) VALUES
-('staff-1', 'Trần Văn Hoàng', 'hoang232@gmail.com', '0902441254', '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'admin', 'Nhân viên bán hàng', NULL, NULL, 0);
+INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, ` education_level`, `certificate`, `working_day`, `password`, `role`, `note`, `name_bank`, `id_bank`) VALUES
+('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', NULL, NULL, NULL, 'admin', 0, NULL, NULL, NULL),
+('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', NULL, NULL, NULL, 'admin', 1, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
