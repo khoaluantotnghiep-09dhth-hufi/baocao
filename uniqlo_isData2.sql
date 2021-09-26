@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2021 at 07:17 AM
+-- Generation Time: Sep 26, 2021 at 05:53 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -39,20 +39,22 @@ CREATE TABLE `tbl_bill` (
   `phone` text DEFAULT NULL,
   `email` text DEFAULT NULL,
   `total_quantity` int(11) DEFAULT NULL,
-  `note` text DEFAULT NULL
+  `note` text DEFAULT NULL,
+  `name_customer` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_bill`
 --
 
-INSERT INTO `tbl_bill` (`id`, `order_date`, `total`, `status`, `id_customer`, `id_staff`, `delivery_date`, `address`, `phone`, `email`, `total_quantity`, `note`) VALUES
-('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1', NULL, NULL, NULL, NULL, NULL, NULL),
-('bill-24', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL),
-('bill-424', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL),
-('bill-44', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '090251425', '', NULL, NULL),
-('bill-446', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL),
-('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL);
+INSERT INTO `tbl_bill` (`id`, `order_date`, `total`, `status`, `id_customer`, `id_staff`, `delivery_date`, `address`, `phone`, `email`, `total_quantity`, `note`, `name_customer`) VALUES
+('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('bill-24', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
+('bill-424', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
+('bill-44', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '090251425', '', NULL, NULL, NULL),
+('bill-446', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
+('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
+('bill-customer-ku0oqdut', '2021-09-26', 300000, 0, 'user-1', NULL, NULL, 'hcm , Tỉnh Tuyên Quang , Huyện Chiêm Hóa , Xã Minh Quang', '0929512395', '2001180454@edu.hufi.vn', 1, '', 'sa');
 
 -- --------------------------------------------------------
 
@@ -73,6 +75,7 @@ CREATE TABLE `tbl_bill_info` (
 --
 
 INSERT INTO `tbl_bill_info` (`id`, `id_bill`, `id_product_info`, `into_money`, `quantity`) VALUES
+('bill-customer-info-ku0oqduu', 'bill-customer-ku0oqdut', 'product-info-81', 300000, 1),
 ('bill-info-1', 'bill-1', 'product-info-1', 140000, 4),
 ('bill-info-2', 'bill-1', 'product-info-1', 140000, 1),
 ('bill-info-3', 'bill-1', 'product-info-1', 140000, 3),
@@ -454,7 +457,7 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-1', 'product-1', 'size-S', 'color-1', 1),
 ('product-info-5', 'product-1', 'size-L', 'color-2', 3),
 ('product-info-52', 'product-1', 'size-L', 'color-2', 12),
-('product-info-81', 'product-1', 'size-S', 'color-2', 1),
+('product-info-81', 'product-1', 'size-S', 'color-2', 0),
 ('product-info-ktunkest', 'product-2', 'size-S', 'color-2', 10),
 ('product-info-ktv81ueb', 'product-4', 'size-M', 'color-1', 1),
 ('product-info-ktwgkrg5', 'product-4', 'size-M', 'color-2', 10),
@@ -531,7 +534,8 @@ CREATE TABLE `tbl_promotion` (
 
 INSERT INTO `tbl_promotion` (`id`, `name`, `date_start`, `date_end`, `description`, `image`) VALUES
 ('0', 'Chào Đón Noel An Lành', '2021-09-28', '2021-10-27', '0', NULL),
-('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL);
+('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL),
+('promotion-ktzcirmr', 'HUY Nguyen', '2021-09-27', '2021-09-30', '50', 'blob:http://localhost:3000/e24b07de-87b1-4780-93d9-e93c9295d155');
 
 -- --------------------------------------------------------
 
