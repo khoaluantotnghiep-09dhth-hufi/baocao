@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2021 at 05:53 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.4.22
+-- Generation Time: Sep 26, 2021 at 06:04 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test_2`
+-- Database: `uniqlo`
 --
 
 -- --------------------------------------------------------
@@ -48,13 +48,12 @@ CREATE TABLE `tbl_bill` (
 --
 
 INSERT INTO `tbl_bill` (`id`, `order_date`, `total`, `status`, `id_customer`, `id_staff`, `delivery_date`, `address`, `phone`, `email`, `total_quantity`, `note`, `name_customer`) VALUES
-('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('bill-24', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
-('bill-424', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
-('bill-44', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '090251425', '', NULL, NULL, NULL),
-('bill-446', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
-('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, NULL),
-('bill-customer-ku0oqdut', '2021-09-26', 300000, 0, 'user-1', NULL, NULL, 'hcm , Tỉnh Tuyên Quang , Huyện Chiêm Hóa , Xã Minh Quang', '0929512395', '2001180454@edu.hufi.vn', 1, '', 'sa');
+('bill-1', '2021-09-08', 0, NULL, 'user-1', 'staff-1', NULL, NULL, NULL, NULL, NULL, NULL, ''),
+('bill-24', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
+('bill-424', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
+('bill-44', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '090251425', '', NULL, NULL, ''),
+('bill-446', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
+('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -75,7 +74,6 @@ CREATE TABLE `tbl_bill_info` (
 --
 
 INSERT INTO `tbl_bill_info` (`id`, `id_bill`, `id_product_info`, `into_money`, `quantity`) VALUES
-('bill-customer-info-ku0oqduu', 'bill-customer-ku0oqdut', 'product-info-81', 300000, 1),
 ('bill-info-1', 'bill-1', 'product-info-1', 140000, 4),
 ('bill-info-2', 'bill-1', 'product-info-1', 140000, 1),
 ('bill-info-3', 'bill-1', 'product-info-1', 140000, 3),
@@ -208,6 +206,7 @@ CREATE TABLE `tbl_customer` (
 --
 
 INSERT INTO `tbl_customer` (`id`, `name`, `address`, `phone`, `image`, `password`, `email`, `gender`, `cmnd_cccc`) VALUES
+('customer-ku0oahls', 'Tạ Quang Trung', 'tân phú', '0352393384', '', 'admin', 'trungquangta115@gmail.com', NULL, NULL),
 ('user-1', 'Nguyễn Thanh Huy', '1920,Phường 8,Quận Gò Vấp,Tp.HCM', '0902559431', '', 'thanhhuy456', 'huynguyen2913@gmail.com', NULL, NULL),
 ('user-2', 'Nguyễn Thị Thanh Toàn', 'HCM', 'admin', '', 'admin', 'thanhtian29123@gmail.com', NULL, NULL);
 
@@ -300,7 +299,8 @@ INSERT INTO `tbl_news` (`id`, `title`, `date`, `description`, `id_staff`, `image
 ('news-4', 'Vẻ đẹp Đơn giản mà thời thượng khi áo rộng kết hợp cùng Legging!', '2021-08-23', 'Bạn sẽ không sai lầm khi kết hợp áo thun và quần legging! Kiểu phối đồ đơn giản nhưng lại là sự cân bằng hoàn hảo, mang đến cho bạn vẻ ngoài sành điệu. Hãy cùng UNIQLO điểm qua sáu kiểu quần legging hot nhất mùa này cùng những cách phối mới nhất, thời thượng nhất theo xu hướng thời trang của năm nay.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021042301/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021042301/img/mimg_1_m.jpg'),
 ('news-5', 'THOẢI MÁI VÀ SANG TRỌNG CÙNG LINEN TỪ UNIQLO', '2021-09-23', 'Thời điểm này trong năm là lúc chúng ta bắt đầu cân nhắc về phong cách thời trang gắn với linen – chất vải mềm mại & gắn liền với tự nhiên. UNIQLO sẻ là điểm đến lý tưởng nơi bạn có thể tìm thấy rất nhiều các sản phẩm linen trong mùa này, đa dạng từ sơ mi cơ bản đến quần short thời trang, kể cả những mẫu thiết kế có thể phối cùng. Bạn chắc chắn sẽ yêu thích sự đa dạng của các loại vải linen UNIQLO từ linen 100% cao cấp đến Linen pha thướt tha.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/mimg_1_m.jpg'),
 ('news-6', 'Sống chậm lại, yêu bản thân hơn trong những ngày giao mùa “đặc biệt”', '2020-11-23', 'Những ngày giao mùa đặc biệt hơn cả, đây là khoảng thời gian mà niềm vui không đến từ các hoạt động sôi nổi hay náo nhiệt nữa mà đến từ sự yêu thương, chăm sóc cơ thể, sống chậm lại để cảm nhận nhiều hơn. Những gam màu dịu mắt sẽ giúp bạn tìm thấy sự bình yên ấy trong tâm hồn. Vẫn năng động và thoải mái như những đặc tính vốn có nhưng với những gam màu nhẹ nhàng, trung tính, bạn lại có thể tạo ra những bản phối hoàn toàn khác dành cho những chiếc áo thun, quần short quen thuộc thường nhật.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/mimg_1_m.png'),
-('news-8', 'TẬN HƯỞNG SỰ THOẢI MÁI TUYỆT VỜI NGAY TẠI NHÀ', '2020-11-24', 'Những ngày chuyển mùa mưa gió, những ngày dịch vẫn chưa lắng xuống hoàn toàn hay đơn giản là những ngày cuối tuần chỉ muốn nghỉ ngơi thật sâu, chúng ta sẽ mong bất cứ khi nào ở nhà đều có thể là khoảng thoải mái nhất để làm những điều mình thích. Nhưng thoải mái chưa đủ, với phái đẹp ở nhà cũng phải đẹp?\n\nUNIQLO mang đến cho bạn những gợi ý thời trang LifeWear để dù làm việc online, nấu ăn tại nhà, bạn cũng thật tự tin và thư giãn. Cùng khám phá đó là những sản phẩm nào và đến ngay các cửa hàng UNIQLO để sở hữu bạn nhé.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/mimg_1_m.png');
+('news-8', 'TẬN HƯỞNG SỰ THOẢI MÁI TUYỆT VỜI NGAY TẠI NHÀ', '2020-11-24', 'Những ngày chuyển mùa mưa gió, những ngày dịch vẫn chưa lắng xuống hoàn toàn hay đơn giản là những ngày cuối tuần chỉ muốn nghỉ ngơi thật sâu, chúng ta sẽ mong bất cứ khi nào ở nhà đều có thể là khoảng thoải mái nhất để làm những điều mình thích. Nhưng thoải mái chưa đủ, với phái đẹp ở nhà cũng phải đẹp?\n\nUNIQLO mang đến cho bạn những gợi ý thời trang LifeWear để dù làm việc online, nấu ăn tại nhà, bạn cũng thật tự tin và thư giãn. Cùng khám phá đó là những sản phẩm nào và đến ngay các cửa hàng UNIQLO để sở hữu bạn nhé.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/mimg_1_m.png'),
+('news-ktzhap4l', 'a', '2021-09-25', 'ádsad', 'staff-3', 'ád', 'ád');
 
 -- --------------------------------------------------------
 
@@ -389,7 +389,7 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id`, `name`, `price`, `description`, `like_product`, `dislike_product`, `id_category`, `image`, `id_promotion`) VALUES
-('product-1', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 400000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442140/item/09_442140.jpg', 'promotion-ktmzkqjx'),
+('product-1', 'test', 32423, 'dsad', 0, 1, 'category-1', 'blob:http://localhost:3000/ec349840-1a66-4e60-8eec-1b19ddf214dd', '0'),
 ('product-2', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-2', 'https://im.uniqlo.com/images/common/pc/goods/442141/item/15_442141.jpg', '0'),
 ('product-4', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442138/item/09_442138.jpg', '0'),
 ('product-ktwuvdn6', 'NỮ UT PEANUTS Vintage Áo Thun Ngắn Tay', 249000, 'abc', 0, 0, 'category-1', 'blob:http://localhost:3000/f14e7672-b693-4179-ba3b-37c1b72181e8', 'promotion-ktmzkqjx'),
@@ -431,8 +431,17 @@ INSERT INTO `tbl_product` (`id`, `name`, `price`, `description`, `like_product`,
 CREATE TABLE `tbl_product_exchange` (
   `id` varchar(50) NOT NULL,
   `id_bill_info` varchar(50) NOT NULL,
-  `reason` text DEFAULT NULL
+  `reason` text DEFAULT NULL,
+  `id_staff_change` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_product_exchange`
+--
+
+INSERT INTO `tbl_product_exchange` (`id`, `id_bill_info`, `reason`, `id_staff_change`) VALUES
+('exchange-1', 'bill-info-1', 'đổi chơi đc k =))', 'staff-1'),
+('exchange-ku0okgim', 'bill-info-1', 'đổi chơi', 'staff-3');
 
 -- --------------------------------------------------------
 
@@ -457,7 +466,7 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-1', 'product-1', 'size-S', 'color-1', 1),
 ('product-info-5', 'product-1', 'size-L', 'color-2', 3),
 ('product-info-52', 'product-1', 'size-L', 'color-2', 12),
-('product-info-81', 'product-1', 'size-S', 'color-2', 0),
+('product-info-81', 'product-1', 'size-S', 'color-2', 1),
 ('product-info-ktunkest', 'product-2', 'size-S', 'color-2', 10),
 ('product-info-ktv81ueb', 'product-4', 'size-M', 'color-1', 1),
 ('product-info-ktwgkrg5', 'product-4', 'size-M', 'color-2', 10),
@@ -534,8 +543,7 @@ CREATE TABLE `tbl_promotion` (
 
 INSERT INTO `tbl_promotion` (`id`, `name`, `date_start`, `date_end`, `description`, `image`) VALUES
 ('0', 'Chào Đón Noel An Lành', '2021-09-28', '2021-10-27', '0', NULL),
-('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL),
-('promotion-ktzcirmr', 'HUY Nguyen', '2021-09-27', '2021-09-30', '50', 'blob:http://localhost:3000/e24b07de-87b1-4780-93d9-e93c9295d155');
+('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL);
 
 -- --------------------------------------------------------
 
@@ -664,7 +672,8 @@ CREATE TABLE `tbl_staff` (
 
 INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, ` education_level`, `certificate`, `working_day`, `password`, `role`, `note`, `name_bank`, `id_bank`) VALUES
 ('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', NULL, NULL, NULL, 'admin', 0, NULL, NULL, NULL),
-('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', NULL, NULL, NULL, 'admin', 1, NULL, NULL, NULL);
+('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', NULL, NULL, NULL, 'admin', 1, NULL, NULL, NULL),
+('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 'abc', 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', '1', 'ád', '2021-09-25', 'admin', 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -762,7 +771,8 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_product_exchange`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_bill_info` (`id_bill_info`);
+  ADD KEY `id_bill_info` (`id_bill_info`),
+  ADD KEY `id_staff_change` (`id_staff_change`);
 
 --
 -- Indexes for table `tbl_product_info`
@@ -876,7 +886,8 @@ ALTER TABLE `tbl_product`
 -- Constraints for table `tbl_product_exchange`
 --
 ALTER TABLE `tbl_product_exchange`
-  ADD CONSTRAINT `tbl_product_exchange_ibfk_1` FOREIGN KEY (`id_bill_info`) REFERENCES `tbl_bill_info` (`id`);
+  ADD CONSTRAINT `tbl_product_exchange_ibfk_1` FOREIGN KEY (`id_bill_info`) REFERENCES `tbl_bill_info` (`id`),
+  ADD CONSTRAINT `tbl_product_exchange_ibfk_2` FOREIGN KEY (`id_staff_change`) REFERENCES `tbl_staff` (`id`);
 
 --
 -- Constraints for table `tbl_product_info`
