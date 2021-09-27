@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2021 at 06:04 AM
+-- Generation Time: Sep 27, 2021 at 09:04 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -53,7 +53,8 @@ INSERT INTO `tbl_bill` (`id`, `order_date`, `total`, `status`, `id_customer`, `i
 ('bill-424', '2020-09-19', 800000, 1, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
 ('bill-44', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '090251425', '', NULL, NULL, ''),
 ('bill-446', '2020-09-19', 300000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
-('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, '');
+('bill-44644', '2020-09-19', 800000, 0, 'user-1', 'staff-1', '0000-00-00', '1920/12/1,Phường 10, Quận Gò Vấp,HCM', '', '', NULL, NULL, ''),
+('bill-customer-ku0r9zod', '2021-09-26', 186750, 0, 'customer-ku0oahls', NULL, NULL, 'ádsad , Tỉnh Bắc Ninh , Thành phố Bắc Ninh , Phường Hạp Lĩnh', '0352393384', 'trungquangta115@gmail.com', 1, 'abc', 'tạ quang trung');
 
 -- --------------------------------------------------------
 
@@ -74,10 +75,12 @@ CREATE TABLE `tbl_bill_info` (
 --
 
 INSERT INTO `tbl_bill_info` (`id`, `id_bill`, `id_product_info`, `into_money`, `quantity`) VALUES
+('bill-customer-info-ku0r9zoe', 'bill-customer-ku0r9zod', 'product-info-ktwv784e', 186750, 1),
 ('bill-info-1', 'bill-1', 'product-info-1', 140000, 4),
 ('bill-info-2', 'bill-1', 'product-info-1', 140000, 1),
 ('bill-info-3', 'bill-1', 'product-info-1', 140000, 3),
-('bill-info-4', 'bill-1', 'product-info-1', 140000, 3);
+('bill-info-4', 'bill-1', 'product-info-1', 140000, 3),
+('bill-info-test', 'bill-24', 'product-info-52', 140000, 1);
 
 --
 -- Triggers `tbl_bill_info`
@@ -158,7 +161,8 @@ INSERT INTO `tbl_category` (`id`, `name`, `id_sectors`) VALUES
 ('category-ktwursqi', 'Hàng Mới Về', 'sector-ktwubycx'),
 ('category-ktwurzs5', 'Marimekko', 'sector-ktwuc4wn'),
 ('category-ktwusch0', 'Quần Áo Trẻ Sơ Sinh', 'sector-ktwuc9ix'),
-('category-ktwusmax', 'Quần Áo Em Bé', 'sector-ktwucgoi');
+('category-ktwusmax', 'Quần Áo Em Bé', 'sector-ktwucgoi'),
+('category-ku27adoa', 'Test2', 'sector-ktwu5ztn');
 
 -- --------------------------------------------------------
 
@@ -194,7 +198,7 @@ CREATE TABLE `tbl_customer` (
   `name` text DEFAULT NULL,
   `address` text DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `image` text DEFAULT NULL,
+  `image` blob DEFAULT NULL,
   `password` text DEFAULT NULL,
   `email` text DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
@@ -219,7 +223,7 @@ INSERT INTO `tbl_customer` (`id`, `name`, `address`, `phone`, `image`, `password
 CREATE TABLE `tbl_import` (
   `id` varchar(50) NOT NULL,
   `date_import` date DEFAULT NULL,
-  `id_order` varchar(50) NOT NULL,
+  `id_order` varchar(50) DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -228,7 +232,11 @@ CREATE TABLE `tbl_import` (
 --
 
 INSERT INTO `tbl_import` (`id`, `date_import`, `id_order`, `status`) VALUES
-('import-ktxxljxm', '2021-09-24', 'order-ktxxl38f', 0);
+('bill-info-3', '2021-09-26', NULL, 1),
+('import-change-ku0v6mpr', '2021-09-26', NULL, 0),
+('import-ktxxljxm', '2021-09-24', 'order-ktxxl38f', 0),
+('import-ku0qyqo5', '2021-09-26', 'order-ku0qwvsu', 0),
+('import-ku0uvh0r', '2021-09-26', 'order-ku0uu4l9', 0);
 
 --
 -- Triggers `tbl_import`
@@ -247,7 +255,7 @@ DELIMITER ;
 CREATE TABLE `tbl_import_info` (
   `id` varchar(50) NOT NULL,
   `id_import` varchar(50) NOT NULL,
-  `id_order_info` varchar(50) NOT NULL,
+  `id_order_info` varchar(50) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `id_product_info` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -257,8 +265,13 @@ CREATE TABLE `tbl_import_info` (
 --
 
 INSERT INTO `tbl_import_info` (`id`, `id_import`, `id_order_info`, `quantity`, `id_product_info`) VALUES
+('import-change-ku0v6mps', 'import-change-ku0v6mpr', NULL, 1, 'product-info-ktwv784e'),
 ('import-info-ktxxlsmj', 'import-ktxxljxm', 'order-info-ktxxld3z', 3, 'product-info-ktwv8kj1'),
-('import-info-ktxxm66b', 'import-ktxxljxm', 'order-info-ktxxl83z', 3, 'product-info-ktwv8gf8');
+('import-info-ktxxm66b', 'import-ktxxljxm', 'order-info-ktxxl83z', 3, 'product-info-ktwv8gf8'),
+('import-info-ku0qz5tf', 'import-ku0qyqo5', 'order-info-ku0qyhwv', 1, 'product-info-ku0qy000'),
+('import-info-ku0qzddf', 'import-ku0qyqo5', 'order-info-ku0qybl7', 1, 'product-info-ku0qxu86'),
+('import-info-ku0uw1yf', 'import-ku0uvh0r', 'order-info-ku0uugxl', 2, 'product-info-ku0qy000'),
+('import-info-ku0uw64g', 'import-ku0uvh0r', 'order-info-ku0uuc38', 2, 'product-info-ku0qxu86');
 
 --
 -- Triggers `tbl_import_info`
@@ -300,7 +313,8 @@ INSERT INTO `tbl_news` (`id`, `title`, `date`, `description`, `id_staff`, `image
 ('news-5', 'THOẢI MÁI VÀ SANG TRỌNG CÙNG LINEN TỪ UNIQLO', '2021-09-23', 'Thời điểm này trong năm là lúc chúng ta bắt đầu cân nhắc về phong cách thời trang gắn với linen – chất vải mềm mại & gắn liền với tự nhiên. UNIQLO sẻ là điểm đến lý tưởng nơi bạn có thể tìm thấy rất nhiều các sản phẩm linen trong mùa này, đa dạng từ sơ mi cơ bản đến quần short thời trang, kể cả những mẫu thiết kế có thể phối cùng. Bạn chắc chắn sẽ yêu thích sự đa dạng của các loại vải linen UNIQLO từ linen 100% cao cấp đến Linen pha thướt tha.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/mimg_1_m.jpg'),
 ('news-6', 'Sống chậm lại, yêu bản thân hơn trong những ngày giao mùa “đặc biệt”', '2020-11-23', 'Những ngày giao mùa đặc biệt hơn cả, đây là khoảng thời gian mà niềm vui không đến từ các hoạt động sôi nổi hay náo nhiệt nữa mà đến từ sự yêu thương, chăm sóc cơ thể, sống chậm lại để cảm nhận nhiều hơn. Những gam màu dịu mắt sẽ giúp bạn tìm thấy sự bình yên ấy trong tâm hồn. Vẫn năng động và thoải mái như những đặc tính vốn có nhưng với những gam màu nhẹ nhàng, trung tính, bạn lại có thể tạo ra những bản phối hoàn toàn khác dành cho những chiếc áo thun, quần short quen thuộc thường nhật.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/mimg_1_m.png'),
 ('news-8', 'TẬN HƯỞNG SỰ THOẢI MÁI TUYỆT VỜI NGAY TẠI NHÀ', '2020-11-24', 'Những ngày chuyển mùa mưa gió, những ngày dịch vẫn chưa lắng xuống hoàn toàn hay đơn giản là những ngày cuối tuần chỉ muốn nghỉ ngơi thật sâu, chúng ta sẽ mong bất cứ khi nào ở nhà đều có thể là khoảng thoải mái nhất để làm những điều mình thích. Nhưng thoải mái chưa đủ, với phái đẹp ở nhà cũng phải đẹp?\n\nUNIQLO mang đến cho bạn những gợi ý thời trang LifeWear để dù làm việc online, nấu ăn tại nhà, bạn cũng thật tự tin và thư giãn. Cùng khám phá đó là những sản phẩm nào và đến ngay các cửa hàng UNIQLO để sở hữu bạn nhé.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/mimg_1_m.png'),
-('news-ktzhap4l', 'a', '2021-09-25', 'ádsad', 'staff-3', 'ád', 'ád');
+('news-ktzhap4l', 'a', '2021-09-25', 'ádsad', 'staff-3', 'ád', 'ád'),
+('news-ku253k2t', 'test', '2021-09-27', 'sad', 'staff-3', 'sadsa', 'ádsa');
 
 -- --------------------------------------------------------
 
@@ -342,7 +356,9 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`id`, `date_order`, `name_warehouse`, `status`) VALUES
-('order-ktxxl38f', '2021-09-24', 'Kho Đà Nẵng', 1);
+('order-ktxxl38f', '2021-09-24', 'Kho Đà Nẵng', 1),
+('order-ku0qwvsu', '2021-09-26', 'Kho Đà Nẵng', 1),
+('order-ku0uu4l9', '2021-09-26', 'Kho HN', 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +380,11 @@ CREATE TABLE `tbl_order_info` (
 
 INSERT INTO `tbl_order_info` (`id`, `id_order`, `id_product_info`, `quantity`, `status`) VALUES
 ('order-info-ktxxl83z', 'order-ktxxl38f', 'product-info-ktwv8gf8', 3, 1),
-('order-info-ktxxld3z', 'order-ktxxl38f', 'product-info-ktwv8kj1', 3, 1);
+('order-info-ktxxld3z', 'order-ktxxl38f', 'product-info-ktwv8kj1', 3, 1),
+('order-info-ku0qybl7', 'order-ku0qwvsu', 'product-info-ku0qxu86', 1, 1),
+('order-info-ku0qyhwv', 'order-ku0qwvsu', 'product-info-ku0qy000', 1, 1),
+('order-info-ku0uuc38', 'order-ku0uu4l9', 'product-info-ku0qxu86', 2, 1),
+('order-info-ku0uugxl', 'order-ku0uu4l9', 'product-info-ku0qy000', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -380,7 +400,7 @@ CREATE TABLE `tbl_product` (
   `like_product` int(1) DEFAULT 1,
   `dislike_product` int(1) DEFAULT 0,
   `id_category` varchar(50) NOT NULL,
-  `image` text DEFAULT NULL,
+  `image` blob DEFAULT NULL,
   `id_promotion` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -389,38 +409,41 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id`, `name`, `price`, `description`, `like_product`, `dislike_product`, `id_category`, `image`, `id_promotion`) VALUES
-('product-1', 'test', 32423, 'dsad', 0, 1, 'category-1', 'blob:http://localhost:3000/ec349840-1a66-4e60-8eec-1b19ddf214dd', '0'),
-('product-2', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-2', 'https://im.uniqlo.com/images/common/pc/goods/442141/item/15_442141.jpg', '0'),
-('product-4', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 'https://im.uniqlo.com/images/common/pc/goods/442138/item/09_442138.jpg', '0'),
-('product-ktwuvdn6', 'NỮ UT PEANUTS Vintage Áo Thun Ngắn Tay', 249000, 'abc', 0, 0, 'category-1', 'blob:http://localhost:3000/f14e7672-b693-4179-ba3b-37c1b72181e8', 'promotion-ktmzkqjx'),
-('product-ktwuwb7n', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 249000, 'avc', 0, 0, 'category-2', 'blob:http://localhost:3000/c9f45e3b-e003-4f45-b585-4317bc86c249', '0'),
-('product-ktwuwxta', 'NỮ LIGHT FLANNEL CHECKED LONG SLEEVE SHIRT', 32423, 'ád', 0, 0, 'category-1', 'blob:http://localhost:3000/c284c902-b101-4565-96b2-f3e3dd08ffa9', '0'),
-('product-ktwuxm91', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 199000, 'ád', 0, 0, 'category-ktwud9cp', 'blob:http://localhost:3000/025ce4b3-5d18-4b59-80ee-8c7231931a26', '0'),
-('product-ktwuxxxe', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwud9cp', 'blob:http://localhost:3000/7e2af5c3-f21e-480f-97d4-4acb88879302', 'promotion-ktmzkqjx'),
-('product-ktwuy6my', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwudjna', 'blob:http://localhost:3000/07324113-d579-40c8-bdd1-58aa673acb81', '0'),
-('product-ktwuye6t', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwudjna', 'blob:http://localhost:3000/8615da5e-c070-43d6-8d94-dd31c3b5f528', 'promotion-ktmzkqjx'),
-('product-ktwuyoua', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'qưewqeqưeqư', 0, 0, 'category-ktwuedk3', 'blob:http://localhost:3000/85567e85-3893-4cdd-8de2-0dee30da1566', '0'),
-('product-ktwuz1wf', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsad', 0, 0, 'category-ktwuedk3', 'blob:http://localhost:3000/c6f49058-b5ae-4dc5-b7ff-1c7608eaccce', 'promotion-ktmzkqjx'),
-('product-ktwuzi4r', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwuerqr', 'blob:http://localhost:3000/2fe936ba-3697-47ee-be90-cb9e9d006159', 'promotion-ktmzkqjx'),
-('product-ktwuzufd', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuerqr', 'blob:http://localhost:3000/74d4e642-add4-4320-9c4c-ffa94424ec83', 'promotion-ktmzkqjx'),
-('product-ktwv03t6', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuf3pj', 'blob:http://localhost:3000/4d08c0ca-0b8c-460f-9549-ad7459a52a5c', 'promotion-ktmzkqjx'),
-('product-ktwv0emj', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuf3pj', 'blob:http://localhost:3000/9f917ecf-821d-45df-b125-d40c25d75a1b', 'promotion-ktmzkqjx'),
-('product-ktwv1f64', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufcsb', 'blob:http://localhost:3000/04fc52f2-076a-4930-b990-b1151b09d70b', 'promotion-ktmzkqjx'),
-('product-ktwv1s81', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufcsb', 'blob:http://localhost:3000/c86a7c00-1ac0-4ac0-9a33-f64743d660e3', '0'),
-('product-ktwv29l6', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufinj', 'blob:http://localhost:3000/ad358f9b-bce6-45ee-ba26-8d441f443915', 'promotion-ktmzkqjx'),
-('product-ktwv2j5e', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwufinj', 'blob:http://localhost:3000/2fd0debe-24ee-4a7f-8b74-43d75da447c8', '0'),
-('product-ktwv2sys', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufru9', 'blob:http://localhost:3000/7315746b-010a-46f3-9c9e-58b8be45f169', 'promotion-ktmzkqjx'),
-('product-ktwv32vb', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufru9', 'blob:http://localhost:3000/87e7bcce-2467-4f56-866f-3e380b8f4cd5', '0'),
-('product-ktwv3b2l', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áda', 0, 0, 'category-ktwug2lt', 'blob:http://localhost:3000/e6de97bb-95fb-4b5d-bc6a-0b062d293389', 'promotion-ktmzkqjx'),
-('product-ktwv3npt', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsa', 0, 0, 'category-ktwug90n', 'blob:http://localhost:3000/ac7f325c-607a-46db-af53-0fbc24b4eb8c', '0'),
-('product-ktwv3xk2', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwug90n', 'blob:http://localhost:3000/5b387cfe-3059-428c-bd14-460dafbe1c43', '0'),
-('product-ktwv4g1q', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwugj7v', 'blob:http://localhost:3000/9f336d0a-2fa4-47ed-b343-eb276a6be594', 'promotion-ktmzkqjx'),
-('product-ktwv4u2u', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwugj7v', 'blob:http://localhost:3000/99fb3e76-5160-4763-b8a7-292b9f987799', 'promotion-ktmzkqjx'),
-('product-ktwv565o', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwugrx1', 'blob:http://localhost:3000/b16adf91-166c-4afa-a51e-9ea17c3d0862', 'promotion-ktmzkqjx'),
-('product-ktwv5gxq', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwugynn', 'blob:http://localhost:3000/f56e0c00-7085-45d3-af3e-0cb307223e90', 'promotion-ktmzkqjx'),
-('product-ktwv5p50', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsa', 0, 0, 'category-ktwugynn', 'blob:http://localhost:3000/3b2cc1df-a858-406a-a18c-10df5849a0cd', '0'),
-('product-ktwv5xvo', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwuk228', 'blob:http://localhost:3000/134d8143-f0fb-49b8-81a1-3e4b4e42b67b', '0'),
-('product-ktwv691x', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'sadá', 0, 0, 'category-ktwursqi', 'blob:http://localhost:3000/d03e0bab-fddb-4305-b268-9d07e443dec2', '0');
+('product-1', 'test', 32423, 'dsad', 0, 1, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f65633334393834302d316136362d346536302d386565632d316231396464663231346464, '0'),
+('product-2', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-2', 0x68747470733a2f2f696d2e756e69716c6f2e636f6d2f696d616765732f636f6d6d6f6e2f70632f676f6f64732f3434323134312f6974656d2f31355f3434323134312e6a7067, '0'),
+('product-4', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 399000, '\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"', 0, 1, 'category-1', 0x68747470733a2f2f696d2e756e69716c6f2e636f6d2f696d616765732f636f6d6d6f6e2f70632f676f6f64732f3434323133382f6974656d2f30395f3434323133382e6a7067, '0'),
+('product-ktwuvdn6', 'NỮ UT PEANUTS Vintage Áo Thun Ngắn Tay', 249000, 'abc', 0, 0, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f66313465373637322d623639332d343137392d626133622d333763316237323138316538, 'promotion-ktmzkqjx'),
+('product-ktwuwb7n', 'NỮ UT Roy Lichtenstein Áo Thun Ngắn Tay', 249000, 'avc', 0, 0, 'category-2', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f63396634356533622d653030332d346634352d623538352d343331376263383663323439, '0'),
+('product-ktwuwxta', 'NỮ LIGHT FLANNEL CHECKED LONG SLEEVE SHIRT', 32423, 'ád', 0, 0, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f63323834633930322d623130312d343536352d393662322d663365336464303866666139, '0'),
+('product-ktwuxm91', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 199000, 'ád', 0, 0, 'category-ktwud9cp', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f30323563653462332d356431382d346235392d383065652d386337323331393331613236, '0'),
+('product-ktwuxxxe', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwud9cp', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f37653261663563332d663231652d343830662d393764342d346163623838383739333032, 'promotion-ktmzkqjx'),
+('product-ktwuy6my', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwudjna', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f30373332343131332d643537392d343063382d626464312d353861613637336163623831, '0'),
+('product-ktwuye6t', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwudjna', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f38363135646135652d633037302d343364362d386439342d646433316333623566353238, 'promotion-ktmzkqjx'),
+('product-ktwuyoua', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'qưewqeqưeqư', 0, 0, 'category-ktwuedk3', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f38353536376538352d333839332d346364642d386465322d306465653330646131353636, '0'),
+('product-ktwuz1wf', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsad', 0, 0, 'category-ktwuedk3', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f63366634393035382d623561652d346463352d623766662d316337363038656163636365, 'promotion-ktmzkqjx'),
+('product-ktwuzi4r', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwuerqr', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32666539333662612d333639372d343765652d626539302d636239653964303036313539, 'promotion-ktmzkqjx'),
+('product-ktwuzufd', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuerqr', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f37346434653634322d616464342d343332302d396334632d666661393434323465633833, 'promotion-ktmzkqjx'),
+('product-ktwv03t6', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuf3pj', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f34643038633063612d306238632d343630662d393534392d616437343539613532613563, 'promotion-ktmzkqjx'),
+('product-ktwv0emj', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwuf3pj', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f39663931376563662d383231642d343564662d623132352d643430633235643735613162, 'promotion-ktmzkqjx'),
+('product-ktwv1f64', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufcsb', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f30346663353266322d303736612d343933302d623939302d623131353162303964373062, 'promotion-ktmzkqjx'),
+('product-ktwv1s81', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufcsb', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f63383661376330302d316163302d346163302d396133332d663634373433643636306533, '0'),
+('product-ktwv29l6', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufinj', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f61643335386639622d626365362d343565652d626132362d386434343166343433393135, 'promotion-ktmzkqjx'),
+('product-ktwv2j5e', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áđá', 0, 0, 'category-ktwufinj', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32666430646562652d323465652d346137662d386237342d343364373564613434376338, '0'),
+('product-ktwv2sys', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufru9', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f37333135373436622d303130612d343666332d396339652d353862386265343566313639, 'promotion-ktmzkqjx'),
+('product-ktwv32vb', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwufru9', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f38376537626363652d323436372d346635362d383636662d336533383062386634636435, '0'),
+('product-ktwv3b2l', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'áda', 0, 0, 'category-ktwug2lt', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f65366465393762622d393566622d346235642d626336612d306230363264323933333839, 'promotion-ktmzkqjx'),
+('product-ktwv3npt', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsa', 0, 0, 'category-ktwug90n', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f61633766333235632d363037612d343664622d616635332d306662633234623465623863, '0'),
+('product-ktwv3xk2', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwug90n', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f35623338376366652d333035392d343238632d626431342d343630646166626531633433, '0'),
+('product-ktwv4g1q', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwugj7v', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f39663333366430612d326661342d343765642d623334332d656232373661366265353934, 'promotion-ktmzkqjx'),
+('product-ktwv4u2u', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwugj7v', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f39396662336537362d353136302d343736332d623861372d323932623966393837373939, 'promotion-ktmzkqjx'),
+('product-ktwv565o', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwugrx1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f62313661646639312d313636632d346166612d613531652d396561313763336430383632, 'promotion-ktmzkqjx'),
+('product-ktwv5gxq', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádá', 0, 0, 'category-ktwugynn', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f66353665306330302d373038352d343564332d616633652d306362333037323233653930, 'promotion-ktmzkqjx'),
+('product-ktwv5p50', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsa', 0, 0, 'category-ktwugynn', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f33623263633164662d613835382d343036612d613138632d313064663538343961306364, '0'),
+('product-ktwv5xvo', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwuk228', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f31333464383134332d663066622d343962382d383161312d336534623465343262363762, '0'),
+('product-ktwv691x', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'sadá', 0, 0, 'category-ktwursqi', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f64303365306261622d666464622d343330352d623236382d396430376534343364656332, '0'),
+('product-ku0qxjez', 'test Nhập hàng', 32423, 'sadsa', 0, 0, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32373663383436302d346239312d343532652d613263622d666330383262363430653761, '0'),
+('product-ku25xkfs', 'Test2', 32423, 'ưqe', 0, 0, 'category-2', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32633533326266392d346666632d343565662d393265642d316363393966626131323764, 'promotion-ktmzkqjx'),
+('product-ku2631b8', 'update', 32423, 'sadád', 0, 0, 'category-ktwudjna', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f33636431356561662d323564332d343133332d383230392d326162396638653639346339, 'promotion-ktmzkqjx');
 
 -- --------------------------------------------------------
 
@@ -441,7 +464,8 @@ CREATE TABLE `tbl_product_exchange` (
 
 INSERT INTO `tbl_product_exchange` (`id`, `id_bill_info`, `reason`, `id_staff_change`) VALUES
 ('exchange-1', 'bill-info-1', 'đổi chơi đc k =))', 'staff-1'),
-('exchange-ku0okgim', 'bill-info-1', 'đổi chơi', 'staff-3');
+('exchange-ku0okgim', 'bill-info-1', 'đổi chơi', 'staff-3'),
+('exchange-ku0v6mpq', 'bill-customer-info-ku0r9zoe', 'đổi chơi nè', 'staff-3');
 
 -- --------------------------------------------------------
 
@@ -465,7 +489,7 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('bill-info-1', 'product-1', 'size-M', 'color-4', 11),
 ('product-info-1', 'product-1', 'size-S', 'color-1', 1),
 ('product-info-5', 'product-1', 'size-L', 'color-2', 3),
-('product-info-52', 'product-1', 'size-L', 'color-2', 12),
+('product-info-52', 'product-1', 'size-L', 'color-2', 11),
 ('product-info-81', 'product-1', 'size-S', 'color-2', 1),
 ('product-info-ktunkest', 'product-2', 'size-S', 'color-2', 10),
 ('product-info-ktv81ueb', 'product-4', 'size-M', 'color-1', 1),
@@ -520,7 +544,9 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-ktwvg98c', 'product-ktwv4u2u', 'size-M', 'color-2', 4),
 ('product-info-ktwvgef8', 'product-ktwv4g1q', 'size-L', 'color-3', 4),
 ('product-info-ktwvgj3y', 'product-ktwv691x', 'size-M', 'color-1', 4),
-('product-info-ktwvgnyu', 'product-ktwv5xvo', 'size-M', 'color-2', 4);
+('product-info-ktwvgnyu', 'product-ktwv5xvo', 'size-M', 'color-2', 4),
+('product-info-ku0qxu86', 'product-ku0qxjez', 'size-M', 'color-1', 4),
+('product-info-ku0qy000', 'product-ku0qxjez', 'size-M', 'color-2', 4);
 
 -- --------------------------------------------------------
 
@@ -534,7 +560,7 @@ CREATE TABLE `tbl_promotion` (
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `image` text DEFAULT NULL
+  `image` blob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -542,8 +568,10 @@ CREATE TABLE `tbl_promotion` (
 --
 
 INSERT INTO `tbl_promotion` (`id`, `name`, `date_start`, `date_end`, `description`, `image`) VALUES
-('0', 'Chào Đón Noel An Lành', '2021-09-28', '2021-10-27', '0', NULL),
-('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL);
+('0', 'Chào Đón Noel An Lành 2', '2021-09-28', '2021-10-27', NULL, 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f34303166353939622d656231372d343465392d396663372d653732623038383065646161),
+('promotion-ktmzkqjx', 'Tết Gia Đình Đoàn Viên', '2021-12-27', '2021-12-29', '75', NULL),
+('promotion-ku256ua8', 'Tạ Quang Trung', '2021-09-27', '2021-09-29', '12321', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f61623562323438392d373837332d346539382d623837342d646337303939666666356462),
+('promotion-ku270qla', 'Tạ Quang Trung', '2021-09-27', '2021-09-27', 'qư', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32396131323838332d356333382d346439332d396436372d363133326534666631633538);
 
 -- --------------------------------------------------------
 
@@ -651,7 +679,7 @@ CREATE TABLE `tbl_staff` (
   `name` text DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `place_of_birth` text DEFAULT NULL,
-  `image` text DEFAULT NULL,
+  `image` blob DEFAULT NULL,
   `cmnn_cccc` text DEFAULT NULL,
   `address` text DEFAULT NULL,
   `email` text DEFAULT NULL,
@@ -673,7 +701,7 @@ CREATE TABLE `tbl_staff` (
 INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, ` education_level`, `certificate`, `working_day`, `password`, `role`, `note`, `name_bank`, `id_bank`) VALUES
 ('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', NULL, NULL, NULL, 'admin', 0, NULL, NULL, NULL),
 ('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', NULL, NULL, NULL, 'admin', 1, NULL, NULL, NULL),
-('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 'abc', 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', '1', 'ád', '2021-09-25', 'admin', 0, NULL, NULL, NULL);
+('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 0x616263, 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', '1', 'ád', '2021-09-25', 'admin', 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
