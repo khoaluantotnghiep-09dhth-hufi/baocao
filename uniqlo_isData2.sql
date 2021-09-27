@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2021 at 09:04 AM
+-- Generation Time: Sep 27, 2021 at 09:10 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -684,24 +684,18 @@ CREATE TABLE `tbl_staff` (
   `address` text DEFAULT NULL,
   `email` text DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  ` education_level` text DEFAULT NULL,
-  `certificate` text DEFAULT NULL,
-  `working_day` date DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `role` int(11) NOT NULL,
-  `note` text DEFAULT NULL,
-  `name_bank` text DEFAULT NULL,
-  `id_bank` int(11) DEFAULT NULL
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_staff`
 --
 
-INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, ` education_level`, `certificate`, `working_day`, `password`, `role`, `note`, `name_bank`, `id_bank`) VALUES
-('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', NULL, NULL, NULL, 'admin', 0, NULL, NULL, NULL),
-('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', NULL, NULL, NULL, 'admin', 1, NULL, NULL, NULL),
-('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 0x616263, 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', '1', 'ád', '2021-09-25', 'admin', 0, NULL, NULL, NULL);
+INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, `password`, `role`) VALUES
+('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', 'admin', 0),
+('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', 'admin', 1),
+('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 0x616263, 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', 'admin', 0);
 
 --
 -- Indexes for dumped tables
