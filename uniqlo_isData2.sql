@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2021 at 09:10 AM
+-- Generation Time: Sep 28, 2021 at 09:15 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -184,8 +184,7 @@ INSERT INTO `tbl_color` (`id`, `name`, `image`) VALUES
 ('color-1', 'Red', NULL),
 ('color-2', 'Blue', NULL),
 ('color-3', 'Pink', NULL),
-('color-4', 'Orange', NULL),
-('color-ktrcm807', 'Nguyễn Thanh Huy', NULL);
+('color-4', 'Orange', NULL);
 
 -- --------------------------------------------------------
 
@@ -234,6 +233,8 @@ CREATE TABLE `tbl_import` (
 INSERT INTO `tbl_import` (`id`, `date_import`, `id_order`, `status`) VALUES
 ('bill-info-3', '2021-09-26', NULL, 1),
 ('import-change-ku0v6mpr', '2021-09-26', NULL, 0),
+('import-change-ku3e3nw0', '2021-09-28', NULL, 0),
+('import-change-ku3eieyi', '2021-09-28', NULL, 0),
 ('import-ktxxljxm', '2021-09-24', 'order-ktxxl38f', 0),
 ('import-ku0qyqo5', '2021-09-26', 'order-ku0qwvsu', 0),
 ('import-ku0uvh0r', '2021-09-26', 'order-ku0uu4l9', 0);
@@ -266,6 +267,8 @@ CREATE TABLE `tbl_import_info` (
 
 INSERT INTO `tbl_import_info` (`id`, `id_import`, `id_order_info`, `quantity`, `id_product_info`) VALUES
 ('import-change-ku0v6mps', 'import-change-ku0v6mpr', NULL, 1, 'product-info-ktwv784e'),
+('import-change-ku3e3nw1', 'import-change-ku3e3nw0', NULL, 2, 'product-info-ktwv784e'),
+('import-change-ku3eieyj', 'import-change-ku3eieyi', NULL, 4, 'product-info-ktwv784e'),
 ('import-info-ktxxlsmj', 'import-ktxxljxm', 'order-info-ktxxld3z', 3, 'product-info-ktwv8kj1'),
 ('import-info-ktxxm66b', 'import-ktxxljxm', 'order-info-ktxxl83z', 3, 'product-info-ktwv8gf8'),
 ('import-info-ku0qz5tf', 'import-ku0qyqo5', 'order-info-ku0qyhwv', 1, 'product-info-ku0qy000'),
@@ -295,26 +298,27 @@ CREATE TABLE `tbl_news` (
   `id` varchar(50) NOT NULL,
   `title` text DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `descriptionText` longtext DEFAULT NULL,
   `id_staff` varchar(50) DEFAULT NULL,
   `image` text DEFAULT NULL,
-  `image_banner` text DEFAULT NULL
+  `descriptionHTML` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_news`
 --
 
-INSERT INTO `tbl_news` (`id`, `title`, `date`, `description`, `id_staff`, `image`, `image_banner`) VALUES
-('news-1', 'SPORT UTILITY WEAR – Ý TƯỞNG THIẾT KẾ THỂ THAO TIỆN ÍCH MỖI NGÀY', '2021-08-12', 'Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc \"Sports Utility Wear\" trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021060101/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021060101/img/mimg_1_m.jpg'),
-('news-2', 'TRANG PHỤC MẶC NHÀ CHO MÙA HÈ THOẢI MÁI', '2021-09-22', 'Hè sang, thời tiết trở nên dần nóng bức, thời gian ở nhà nhiều hơn, UNIQLO mang đến các sản phẩm thoáng mát, thấm hút mồ hôi giúp bạn tận hưởng những giây phút ở nhà trọn vẹn hơn.\nHơn thế, khi những chuyến du lịch bị hạn chế cũng là lúc bạn có thể dành thêm thời gian bên gia đình và bạn bè với những buổi tiệc nướng BBQ tại vườn hoặc trong công viên. Đồ mặc nhà sẽ trở nên cực kỳ hữu ích trong những dịp như vậy đấy.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021051101/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021051101/img/mimg_1_m.jpg'),
-('news-3', 'UNIQLO TODAY BỘ SƯU TẬP HANA TAJIMA x UNIQLO: TRANG PHỤC LifeWear - ĐƠN GIẢN VÀ TỰ NHIÊN CHO PHỤ NỮ TRƯỞNG THÀNH', '2021-05-21', 'Bộ sưu tập HANA TAJIMA x UNIQLO Xuân / Hè 2021 là lựa chọn hoàn hảo cho thời điểm biến chuyển trong phong cách sống và sự ưu tiên của xã hội hôm nay. Lấy cảm hứng từ ý tưởng \"thay đổi phong cách sống\", những trang phục trong Bộ sưu tập đều vô cùng tiện lợi và thiết thực nhằm hướng đến việc cho phép người mặc được là chính mình khi khoác lên chúng. Đây là bộ sưu tập thứ 12 tại Nhật Bản kể từ khi ra mắt bộ sưu tập đầu tiên Hana Tajima kết hợp cùng UNIQLO vào năm 2015.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021050501/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021050501/img/mimg_1_m.jpg'),
-('news-4', 'Vẻ đẹp Đơn giản mà thời thượng khi áo rộng kết hợp cùng Legging!', '2021-08-23', 'Bạn sẽ không sai lầm khi kết hợp áo thun và quần legging! Kiểu phối đồ đơn giản nhưng lại là sự cân bằng hoàn hảo, mang đến cho bạn vẻ ngoài sành điệu. Hãy cùng UNIQLO điểm qua sáu kiểu quần legging hot nhất mùa này cùng những cách phối mới nhất, thời thượng nhất theo xu hướng thời trang của năm nay.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021042301/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021042301/img/mimg_1_m.jpg'),
-('news-5', 'THOẢI MÁI VÀ SANG TRỌNG CÙNG LINEN TỪ UNIQLO', '2021-09-23', 'Thời điểm này trong năm là lúc chúng ta bắt đầu cân nhắc về phong cách thời trang gắn với linen – chất vải mềm mại & gắn liền với tự nhiên. UNIQLO sẻ là điểm đến lý tưởng nơi bạn có thể tìm thấy rất nhiều các sản phẩm linen trong mùa này, đa dạng từ sơ mi cơ bản đến quần short thời trang, kể cả những mẫu thiết kế có thể phối cùng. Bạn chắc chắn sẽ yêu thích sự đa dạng của các loại vải linen UNIQLO từ linen 100% cao cấp đến Linen pha thướt tha.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/thumb_ll.jpg', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/mimg_1_m.jpg'),
-('news-6', 'Sống chậm lại, yêu bản thân hơn trong những ngày giao mùa “đặc biệt”', '2020-11-23', 'Những ngày giao mùa đặc biệt hơn cả, đây là khoảng thời gian mà niềm vui không đến từ các hoạt động sôi nổi hay náo nhiệt nữa mà đến từ sự yêu thương, chăm sóc cơ thể, sống chậm lại để cảm nhận nhiều hơn. Những gam màu dịu mắt sẽ giúp bạn tìm thấy sự bình yên ấy trong tâm hồn. Vẫn năng động và thoải mái như những đặc tính vốn có nhưng với những gam màu nhẹ nhàng, trung tính, bạn lại có thể tạo ra những bản phối hoàn toàn khác dành cho những chiếc áo thun, quần short quen thuộc thường nhật.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/mimg_1_m.png'),
-('news-8', 'TẬN HƯỞNG SỰ THOẢI MÁI TUYỆT VỜI NGAY TẠI NHÀ', '2020-11-24', 'Những ngày chuyển mùa mưa gió, những ngày dịch vẫn chưa lắng xuống hoàn toàn hay đơn giản là những ngày cuối tuần chỉ muốn nghỉ ngơi thật sâu, chúng ta sẽ mong bất cứ khi nào ở nhà đều có thể là khoảng thoải mái nhất để làm những điều mình thích. Nhưng thoải mái chưa đủ, với phái đẹp ở nhà cũng phải đẹp?\n\nUNIQLO mang đến cho bạn những gợi ý thời trang LifeWear để dù làm việc online, nấu ăn tại nhà, bạn cũng thật tự tin và thư giãn. Cùng khám phá đó là những sản phẩm nào và đến ngay các cửa hàng UNIQLO để sở hữu bạn nhé.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/thumb_ll.png', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/mimg_1_m.png'),
-('news-ktzhap4l', 'a', '2021-09-25', 'ádsad', 'staff-3', 'ád', 'ád'),
-('news-ku253k2t', 'test', '2021-09-27', 'sad', 'staff-3', 'sadsa', 'ádsa');
+INSERT INTO `tbl_news` (`id`, `title`, `date`, `descriptionText`, `id_staff`, `image`, `descriptionHTML`) VALUES
+('news-1', 'SPORT UTILITY WEAR – Ý TƯỞNG THIẾT KẾ THỂ THAO TIỆN ÍCH MỖI NGÀY', '2021-08-12', 'Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc \"Sports Utility Wear\" trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021060101/img/thumb_ll.jpg', ''),
+('news-2', 'TRANG PHỤC MẶC NHÀ CHO MÙA HÈ THOẢI MÁI', '2021-09-22', 'Hè sang, thời tiết trở nên dần nóng bức, thời gian ở nhà nhiều hơn, UNIQLO mang đến các sản phẩm thoáng mát, thấm hút mồ hôi giúp bạn tận hưởng những giây phút ở nhà trọn vẹn hơn.\nHơn thế, khi những chuyến du lịch bị hạn chế cũng là lúc bạn có thể dành thêm thời gian bên gia đình và bạn bè với những buổi tiệc nướng BBQ tại vườn hoặc trong công viên. Đồ mặc nhà sẽ trở nên cực kỳ hữu ích trong những dịp như vậy đấy.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021051101/img/thumb_ll.jpg', ''),
+('news-3', 'UNIQLO TODAY BỘ SƯU TẬP HANA TAJIMA x UNIQLO: TRANG PHỤC LifeWear - ĐƠN GIẢN VÀ TỰ NHIÊN CHO PHỤ NỮ TRƯỞNG THÀNH', '2021-05-21', 'Bộ sưu tập HANA TAJIMA x UNIQLO Xuân / Hè 2021 là lựa chọn hoàn hảo cho thời điểm biến chuyển trong phong cách sống và sự ưu tiên của xã hội hôm nay. Lấy cảm hứng từ ý tưởng \"thay đổi phong cách sống\", những trang phục trong Bộ sưu tập đều vô cùng tiện lợi và thiết thực nhằm hướng đến việc cho phép người mặc được là chính mình khi khoác lên chúng. Đây là bộ sưu tập thứ 12 tại Nhật Bản kể từ khi ra mắt bộ sưu tập đầu tiên Hana Tajima kết hợp cùng UNIQLO vào năm 2015.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021050501/img/thumb_ll.jpg', ''),
+('news-4', 'Vẻ đẹp Đơn giản mà thời thượng khi áo rộng kết hợp cùng Legging!', '2021-08-23', 'Bạn sẽ không sai lầm khi kết hợp áo thun và quần legging! Kiểu phối đồ đơn giản nhưng lại là sự cân bằng hoàn hảo, mang đến cho bạn vẻ ngoài sành điệu. Hãy cùng UNIQLO điểm qua sáu kiểu quần legging hot nhất mùa này cùng những cách phối mới nhất, thời thượng nhất theo xu hướng thời trang của năm nay.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021042301/img/thumb_ll.jpg', ''),
+('news-5', 'THOẢI MÁI VÀ SANG TRỌNG CÙNG LINEN TỪ UNIQLO', '2021-09-23', 'Thời điểm này trong năm là lúc chúng ta bắt đầu cân nhắc về phong cách thời trang gắn với linen – chất vải mềm mại & gắn liền với tự nhiên. UNIQLO sẻ là điểm đến lý tưởng nơi bạn có thể tìm thấy rất nhiều các sản phẩm linen trong mùa này, đa dạng từ sơ mi cơ bản đến quần short thời trang, kể cả những mẫu thiết kế có thể phối cùng. Bạn chắc chắn sẽ yêu thích sự đa dạng của các loại vải linen UNIQLO từ linen 100% cao cấp đến Linen pha thướt tha.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2021040201/img/thumb_ll.jpg', ''),
+('news-6', 'Sống chậm lại, yêu bản thân hơn trong những ngày giao mùa “đặc biệt”', '2020-11-23', 'Những ngày giao mùa đặc biệt hơn cả, đây là khoảng thời gian mà niềm vui không đến từ các hoạt động sôi nổi hay náo nhiệt nữa mà đến từ sự yêu thương, chăm sóc cơ thể, sống chậm lại để cảm nhận nhiều hơn. Những gam màu dịu mắt sẽ giúp bạn tìm thấy sự bình yên ấy trong tâm hồn. Vẫn năng động và thoải mái như những đặc tính vốn có nhưng với những gam màu nhẹ nhàng, trung tính, bạn lại có thể tạo ra những bản phối hoàn toàn khác dành cho những chiếc áo thun, quần short quen thuộc thường nhật.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020073101/img/thumb_ll.png', ''),
+('news-8', 'TẬN HƯỞNG SỰ THOẢI MÁI TUYỆT VỜI NGAY TẠI NHÀ', '2020-11-24', 'Những ngày chuyển mùa mưa gió, những ngày dịch vẫn chưa lắng xuống hoàn toàn hay đơn giản là những ngày cuối tuần chỉ muốn nghỉ ngơi thật sâu, chúng ta sẽ mong bất cứ khi nào ở nhà đều có thể là khoảng thoải mái nhất để làm những điều mình thích. Nhưng thoải mái chưa đủ, với phái đẹp ở nhà cũng phải đẹp?\n\nUNIQLO mang đến cho bạn những gợi ý thời trang LifeWear để dù làm việc online, nấu ăn tại nhà, bạn cũng thật tự tin và thư giãn. Cùng khám phá đó là những sản phẩm nào và đến ngay các cửa hàng UNIQLO để sở hữu bạn nhé.', 'staff-1', 'https://www.uniqlo.com/vn/news/topics/2020072401/img/thumb_ll.png', ''),
+('news-ku3q47ml', 'test thư tiêu đề mới', '2021-09-28', '\n# Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc \\\"Sports Utility Wear\\\" trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.\n![img](https://raw.githubusercontent.com/khoaluantotnghiep-09dhth-hufi/baocao/main/Image/women/goods_00_441832.jpg)\n**Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc \\\"Sports Utility Wear\\\" trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.**\n![img](https://raw.githubusercontent.com/khoaluantotnghiep-09dhth-hufi/baocao/main/Image/women/goods_00_4418792.jpg)\n', 'staff-ku3hap5g', 'blob:http://localhost:3000/6bc54f83-8555-46c6-8840-fd7b382904d5', '<h1>Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc &quot;Sports Utility Wear&quot; trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.</h1>\n<p><img src=\"https://raw.githubusercontent.com/khoaluantotnghiep-09dhth-hufi/baocao/main/Image/women/goods_00_441832.jpg\" alt=\"img\">\n<strong>Sport Utility Wear là một khái niệm mới đến từ UNIQLO, nhằm hướng đến sự đa năng và tiện lợi trong cuộc sống thường nhật. Được sản xuất từ chất liệu khô nhanh và co giãn tối ưu, các sản phẩm thể thao này không chỉ có thể mặc khi tập luyện mà còn mặc được trong nhiều dịp hàng ngày với nhiều phong cách linh hoạt. Bạn có thể mặc &quot;Sports Utility Wear&quot; trong bất kỳ hoàn cảnh nào, dù đi chơi, nghỉ ngơi tại nhà hay thậm chí là mặc đến văn phòng làm việc.</strong>\n<img src=\"https://raw.githubusercontent.com/khoaluantotnghiep-09dhth-hufi/baocao/main/Image/women/goods_00_4418792.jpg\" alt=\"img\"></p>\n'),
+('news-ku3qc1gx', 'sadsad', '2021-09-28', 'sadsadsad', 'staff-ku3hap5g', 'blob:http://localhost:3000/2a913c27-2ff5-4d30-982f-f7caf3847bd1', '<p>sadsadsad</p>\n'),
+('news-ku3qdcfc', 'ádsa', '2021-09-28', 'áđá', 'staff-ku3hap5g', 'blob:http://localhost:3000/6418e629-75b3-4059-939f-2c4ed17b5b3e', '<p>áđá</p>\n');
 
 -- --------------------------------------------------------
 
@@ -396,7 +400,7 @@ CREATE TABLE `tbl_product` (
   `id` varchar(50) NOT NULL,
   `name` text DEFAULT NULL,
   `price` double DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
   `like_product` int(1) DEFAULT 1,
   `dislike_product` int(1) DEFAULT 0,
   `id_category` varchar(50) NOT NULL,
@@ -441,9 +445,7 @@ INSERT INTO `tbl_product` (`id`, `name`, `price`, `description`, `like_product`,
 ('product-ktwv5p50', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ádsa', 0, 0, 'category-ktwugynn', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f33623263633164662d613835382d343036612d613138632d313064663538343961306364, '0'),
 ('product-ktwv5xvo', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'ád', 0, 0, 'category-ktwuk228', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f31333464383134332d663066622d343962382d383161312d336534623465343262363762, '0'),
 ('product-ktwv691x', 'NỮ AIRism A LINE SHORT SLEEVE POLO SHIRT', 32423, 'sadá', 0, 0, 'category-ktwursqi', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f64303365306261622d666464622d343330352d623236382d396430376534343364656332, '0'),
-('product-ku0qxjez', 'test Nhập hàng', 32423, 'sadsa', 0, 0, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32373663383436302d346239312d343532652d613263622d666330383262363430653761, '0'),
-('product-ku25xkfs', 'Test2', 32423, 'ưqe', 0, 0, 'category-2', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32633533326266392d346666632d343565662d393265642d316363393966626131323764, 'promotion-ktmzkqjx'),
-('product-ku2631b8', 'update', 32423, 'sadád', 0, 0, 'category-ktwudjna', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f33636431356561662d323564332d343133332d383230392d326162396638653639346339, 'promotion-ktmzkqjx');
+('product-ku0qxjez', 'test Nhập hàng', 32423, 'sadsa', 0, 0, 'category-1', 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f32373663383436302d346239312d343532652d613263622d666330383262363430653761, '0');
 
 -- --------------------------------------------------------
 
@@ -463,9 +465,7 @@ CREATE TABLE `tbl_product_exchange` (
 --
 
 INSERT INTO `tbl_product_exchange` (`id`, `id_bill_info`, `reason`, `id_staff_change`) VALUES
-('exchange-1', 'bill-info-1', 'đổi chơi đc k =))', 'staff-1'),
-('exchange-ku0okgim', 'bill-info-1', 'đổi chơi', 'staff-3'),
-('exchange-ku0v6mpq', 'bill-customer-info-ku0r9zoe', 'đổi chơi nè', 'staff-3');
+('exchange-1', 'bill-info-1', 'đổi chơi đc k =))', 'staff-1');
 
 -- --------------------------------------------------------
 
@@ -496,7 +496,7 @@ INSERT INTO `tbl_product_info` (`id`, `id_product`, `id_size`, `id_color`, `quan
 ('product-info-ktwgkrg5', 'product-4', 'size-M', 'color-2', 10),
 ('product-info-ktwv6ruq', 'product-2', 'size-XL', 'color-2', 5),
 ('product-info-ktwv6yom', 'product-2', 'size-XXL', 'color-3', 5),
-('product-info-ktwv784e', 'product-ktwuvdn6', 'size-L', 'color-1', 5),
+('product-info-ktwv784e', 'product-ktwuvdn6', 'size-L', 'color-1', 11),
 ('product-info-ktwv7ffw', 'product-ktwuvdn6', 'size-M', 'color-1', 5),
 ('product-info-ktwv7op8', 'product-ktwuwb7n', 'size-S', 'color-2', 5),
 ('product-info-ktwv7u1j', 'product-ktwuwb7n', 'size-XL', 'color-3', 3),
@@ -694,8 +694,8 @@ CREATE TABLE `tbl_staff` (
 
 INSERT INTO `tbl_staff` (`id`, `name`, `gender`, `place_of_birth`, `image`, `cmnn_cccc`, `address`, `email`, `phone`, `password`, `role`) VALUES
 ('staff-1', 'Trần Văn Hoàng', NULL, NULL, NULL, NULL, '32/2,Phường 2, Quận Tân Bình,Tp.HCM', 'hoang232@gmail.com', '0902441254', 'admin', 0),
-('staff-2', 'Nguyễn Bảo Hân', NULL, NULL, NULL, '9245455', '1322/223/2,Phường 12, Quận Tân Bình,Tp.HCM', 'han@gmail.com', '0929512395', 'admin', 1),
-('staff-3', 'Tạ Quang Trung', 1, 'Lâm Đồng', 0x616263, 'xyz', 'xzcxz', 'trungquangta115@gmail.com', '0352393384', 'admin', 0);
+('staff-ku3gwbjr', 'Tạ Quang Trung', NULL, NULL, 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f61383331353137342d653936642d346638652d626138382d383637316666386637383336, NULL, '8A Nguyễn Hữu Tiến - Tây Thạnh - Tân Phú', 'trungquangta1155@gmail.com', '+84352393384', '123456', 1),
+('staff-ku3hap5g', 'Tạ Quang Trung', NULL, NULL, 0x626c6f623a687474703a2f2f6c6f63616c686f73743a333030302f64613065333065322d313532612d343332312d623162622d343061306133663236626530, NULL, '8A Nguyễn Hữu Tiến - Tây Thạnh - Tân Phú', 'trungquangta115@gmail.com', '+84352393384', '123456', 0);
 
 --
 -- Indexes for dumped tables
