@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2021 at 10:18 AM
+-- Generation Time: Oct 01, 2021 at 11:21 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -305,7 +305,8 @@ INSERT INTO `tbl_news` (`id`, `title`, `date`, `descriptionText`, `id_staff`, `i
 CREATE TABLE `tbl_notification` (
   `id` varchar(50) NOT NULL,
   `is_read` tinyint(4) NOT NULL,
-  `content` text NOT NULL
+  `content` text NOT NULL,
+  `time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
